@@ -78,8 +78,8 @@ function getPage(callback) {
 }
 
 var myData = { 
-
-    "d9275c2e2cac27215841": "American Express",
+    "a42ecce24ae285aea068":"HomePage",
+    //"d9275c2e2cac27215841": "American Express",
     "35fdcd1a842f9bd38093": "Be Healthier",
     "24faf2f946aaaf4df61c": "Care for Family",
     "e598bce4cbbc130ca67c": "Chat Money Expert",
@@ -159,7 +159,11 @@ function reShowForm() {
 
                 node = branch.readNode(pageIdToLoad).then(function () { 
                     //showAmexForm();
-                    showDrop();
+                    if (node.heading == 'HomePage') {
+                        showHomePage();
+                    } else {
+                        showDrop();
+                    }
                 });
             });
         });
@@ -172,6 +176,153 @@ function reShowForm() {
 
 
 }
+
+function  showHomePage() {
+    
+    $("#field1").empty();
+
+        $("#field1").alpaca({
+            "view": "bootstrap-edit",
+            "data":node,
+            "schema": {
+                "title": "American Express HomePage",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Page Name",
+                        readonly: true
+                    },
+                    "heading": {
+                        "type": "string",
+                        "title": "Heading",
+                        readonly: true
+                    },
+                    "title": {
+                        "type": "string",
+                        "title": "Page Title",
+                        readonly: true
+                    },
+                    "prefix": {
+                        "type": "string",
+                        "title": "prefix",
+                        readonly: true
+                    },
+                    "flag": {
+                        "type": "string",
+                        "title": "flag",
+                        readonly: true
+                    },
+                    "body": {
+                        "type": "string",
+                        "title": "body",
+                        readonly: true
+                    },
+                    "banner": {
+                        "type": "array",
+                        "title": "Banners",
+                        "items": {
+                            "properties": {
+                                "imageBanner": {
+                                    "type": "string",
+                                    "title": "ImageBanner"
+                                },
+                                "imageP": {
+                                    "type": "string",
+                                    "title": "Image1stParagraph"
+                                },
+                                "imageH": {
+                                    "type": "string",
+                                    "title": "ImageHeading"
+                                },
+                                "imageP2": {
+                                    "type": "string",
+                                    "title": "Image2ndParagraph"
+                                },
+                                "imageLink": {
+                                    "type": "string",
+                                    "title": "ImageLink"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "forHealth": {
+                        "type": "array",
+                        "title": "HealthTile",
+                        "items": {
+                            "properties": {
+                                "link": {
+                                    "type": "string",
+                                    "title": "Health Tile Link Url"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "Health Tile Description"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                        
+                },              
+                "_parent": "n:node",
+                "description": "custom:homepageame0",
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "items": {}                
+            },
+            "options": {
+                "form": {
+                    "buttons": {
+                        "submit": {
+                            "click": function () {
+                                clearTimer();
+                                console.log("Timer Cleared");
+                                setTimer();
+                                console.log("Timer Set");
+
+                                var value = this.getValue();
+                                alert(JSON.stringify(value, null, "  "));
+
+ 
+
+                                node.update().then(function () {
+                                    alert("Form Submitted")
+                                });
+                            }
+                        }
+                    }
+                },
+                "title": "newPageTitle",
+                "engineId": "alpaca1",
+                "fields": {                    
+                    "banner": {
+                        "type": "array",
+                        "toolbarSticky": true,
+                        "items": {
+                                 "actionbar": {
+                                        "actions": [
+                                            {
+                                                "action": "add",
+                                                "enabled": false
+                                            },
+                                            {
+                                                "action": "remove",
+                                                "enabled": false
+                                            }
+                                        ]
+                                    }
+                                
+                                } 
+                             
+                    } 
+                   
+                }
+            } 
+        });
+    
+     
+ }
 function showDrop(){
 
     //console.log(node.topics);
@@ -370,10 +521,16 @@ function showForm(str) {
                                 },
                                 "items": {
                                     "actionbar": {
-                                        "actions": [{
+                                        "actions": [
+                                            {
                                             "action": "add",
                                             "enabled": false
-                                        }]
+                                            },
+                                            {
+                                                "action": "remove",
+                                                "enabled": false
+                                            }
+                                        ]
                                     }
                                 },
                                 "rich_blobs": {
@@ -389,6 +546,10 @@ function showForm(str) {
                                         "actions": [{
                                             "action": "add",
                                             "enabled": false
+                                        },
+                                        {
+                                            "action": "remove",
+                                            "enabled": false
                                         }]
                                     }
                                 }
@@ -403,103 +564,7 @@ function showForm(str) {
     f("bootstrap-edit");
 
     
-    /*
-    
-    $("#myform").alpaca({
-        "view": "bootstrap-edit",
-        "data": node,
-        "schema": {
-            "properties": {
-                "topics": {
-                    "type": "array",
-                    "title": "Topics",
-                    "items": {
-                        "properties": {
-                            "topicHeader": {
-                                "type": "string",
-                                "title": "Topic Header",
-                                readonly: true
-                            },
-                            "topicTitle1": {
-                                "type": "string",
-                                "title": "TopicTitle"
-                            },
-                            "items": {
-                                "type": "array",
-                                "title": "Callout Items",
-                                "items": {
-                                    "type": "object",
-                                    "title": "Item",
-                                    "properties": {
-                                        "link": {
-                                            "type": "string",
-                                            "title": "Link Url"
-                                        },
-                                        "sblob": {
-                                            "type": "string",
-                                            "title": "Description"
-                                        }
-                                    }
-                                }
-                            },
-                            "rich_blobs": {
-                                "items": {
-                                    "type": "string",
-                                    "title": "Items"
-                                },
-                                "type": "array",
-                                "title": "Editable Callouts"
-                            }
-                        },
-                        "type": "object",
-                        "dependencies": {
-                            "topicTitle1":"topicHeader"
-                        }
-                    }
-                }
-            }
-        },
-        "option":
-            {
-                "topics": {
-                    "type": "array",
-                    "toolbarSticky": false,
-                    "items": {
-                        "fields": {
-                            "topicTitle1": {
-                                "type": "text"
-                            },
-                            "items": {
-                                "actionbar": {
-                                    "actions": [{
-                                        "action": "add",
-                                        "enabled": false
-                                    }]
-                                }
-                            },
-                            "rich_blobs": {
-                                "items": {
-                                    "type": "ckeditor",
-                                    "ckeditor": {
-                                        "toolbar": [
-                                            ['Bold', 'Italic', 'Underline', 'Cut', 'Copy', 'Paste'], ['NumberedList', 'BulletedList'], ['Table', 'Source']
-                                        ]
-                                    }
-                                },
-                                "actionbar": {
-                                    "actions": [{
-                                        "action": "add",
-                                        "enabled": false
-                                    }]
-                                }
-                            }
-                        }
-                    }
-                }
-        }
-    });
-  
-  */
+     
 }
 
 
