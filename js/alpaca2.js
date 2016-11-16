@@ -180,7 +180,7 @@ function reShowForm() {
 function  showHomePage() {
     
     $("#field1").empty();
-
+    $("#myform").css('visibility','hidden');
         $("#field1").alpaca({
             "view": "bootstrap-edit",
             "data":node,
@@ -263,12 +263,46 @@ function  showHomePage() {
                             },
                             "type": "object"
                         }
+                    },
+                    "forMoney": {
+                        "type": "array",
+                        "title": "MoneyTile",
+                        "items": {
+                            "properties": {
+                                "link": {
+                                    "type": "string",
+                                    "title": "Money Tile Link Url"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "Money Tile Description"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "forFamily": {
+                        "type": "array",
+                        "title": "FamilyTile",
+                        "items": {
+                            "properties": {
+                                "link": {
+                                    "type": "string",
+                                    "title": "Family Tile Link Url"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "Family Tile Description"
+                                }
+                            },
+                            "type": "object"
+                        }
                     }
                         
                 },              
                 "_parent": "n:node",
                 "description": "custom:homepageame0",
-                "$schema": "http://json-schema.org/draft-04/schema#",
+                "$schema": "http://json-schema.org/draft-01/schema#",
                 "items": {}                
             },
             "options": {
@@ -284,7 +318,17 @@ function  showHomePage() {
                                 var value = this.getValue();
                                 alert(JSON.stringify(value, null, "  "));
 
- 
+                                node.name = value.name;
+                                node.heading = value.heading;
+                                node.title = value.title;
+                                node.prefix = value.prefix;
+                                node.flag = value.flag;
+                                node.body = value.body;
+                                node.banner = value.banner;
+                                node.forHealth = value.forHealth;
+                                node.forMoney = value.forMoney;
+                                node.forFamily = value.forFamily;
+                                
 
                                 node.update().then(function () {
                                     alert("Form Submitted")
@@ -298,24 +342,70 @@ function  showHomePage() {
                 "fields": {                    
                     "banner": {
                         "type": "array",
-                        "toolbarSticky": true,
-                        "items": {
-                                 "actionbar": {
-                                        "actions": [
-                                            {
-                                                "action": "add",
-                                                "enabled": false
-                                            },
-                                            {
-                                                "action": "remove",
-                                                "enabled": false
-                                            }
-                                        ]
-                                    }
+                        "toolbarSticky": true,                        
+                        "actionbar": {
+                            "actions": [
+                                {
+                                    "action": "add",
+                                    "enabled": false
+                                },
+                                {
+                                    "action": "remove",
+                                    "enabled": false
+                                }]                            
                                 
-                                } 
+                        } 
                              
-                    } 
+                    },
+                    "forHealth": {
+                        "type": "array",
+                        "toolbarSticky": true,
+                        "actionbar": {
+                            "actions": [
+                                {
+                                    "action": "add",
+                                    "enabled": false
+                                },
+                                {
+                                    "action": "remove",
+                                    "enabled": false
+                                }]
+
+                        }
+                    },
+                    "forMoney": {
+                        "type": "array",
+                        "toolbarSticky": true,
+                        "actionbar": {
+                            "actions": [
+                                {
+                                    "action": "add",
+                                    "enabled": false
+                                },
+                                {
+                                    "action": "remove",
+                                    "enabled": false
+                                }]
+
+                        }
+                    },
+                    "forFamily": {
+                        "type": "array",
+                        "toolbarSticky": true,
+                        "actionbar": {
+                            "actions": [
+                                {
+                                    "action": "add",
+                                    "enabled": false
+                                },
+                                {
+                                    "action": "remove",
+                                    "enabled": false
+                                }]
+
+                        }
+                    }
+
                    
                 }
             } 
@@ -328,7 +418,7 @@ function showDrop(){
     //console.log(node.topics);
    
     $("#myform").html("");
-
+    $("#myform").css('visibility', 'visible');
     var topicArray = new Array();
     for (var i = 0; i < node.topics.length; i++) {
          topicArray[i] = node.topics[i].topicHeader;
@@ -555,7 +645,8 @@ function showForm(str) {
                                 }
                             
                             }
-                        }
+                        } 
+
                     }
                 }
             } 
