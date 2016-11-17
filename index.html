@@ -103,12 +103,40 @@
         }
         /* topics style ends here */
 
+       
+
         /* style for homepage*/
+        [data-alpaca-container-item-name='body'].alpaca-container-item,
+        [data-alpaca-container-item-name='prefix'].alpaca-container-item,
+        [data-alpaca-container-item-name='flag'].alpaca-container-item ,
+        [data-alpaca-container-item-name='name'].alpaca-container-item ,
+        [data-alpaca-container-item-name='heading'].alpaca-container-item {
+            display:none
+        }
+         [data-alpaca-field-name *= "banner_"].alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid {
+                border:2px solid rgba(19, 77, 104, 0.78);
+         }
+           [data-alpaca-field-name = "banner"].alpaca-field.alpaca-field-array.alpaca-optional.alpaca-field-valid {
+                border: 3px solid rgba(141, 91, 0, 0.66);
+            }
+
+
+          [data-alpaca-field-name = "forHealth"].alpaca-field.alpaca-field-array.alpaca-optional.alpaca-field-valid {
+               border: 3px solid #009bbb;
+
+          }
+          [data-alpaca-field-name = "forMoney"].alpaca-field.alpaca-field-array.alpaca-optional.alpaca-field-valid {
+            border: 3px solid #3f9c35;
+            }
+
+          [data-alpaca-field-name = "forFamily"].alpaca-field.alpaca-field-array.alpaca-optional.alpaca-field-valid {
+            border: 3px solid #a72e9c;
+            }
 
 
         /* home page style ends here*/
 
-
+       
 
         html
         {
@@ -160,7 +188,10 @@
                             <div id="myDropdown">
                             </div>
                             <div id="myTopic" style="display: block"></div>
-                            <div id="myform" style="display: block"></div>
+                            <div id="myform" style="display: block">
+                              
+
+                            </div>
                             <div id="field1" style="display: block"></div>
 
                         </div>

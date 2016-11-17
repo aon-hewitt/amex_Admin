@@ -416,66 +416,56 @@ function  showHomePage() {
 function showDrop(){
 
     //console.log(node.topics);
-   
-    $("#myform").html("");
+ 
     $("#myform").css('visibility', 'visible');
     var topicArray = new Array();
-    for (var i = 0; i < node.topics.length; i++) {
-         topicArray[i] = node.topics[i].topicHeader;
-
-    }
     
+    for (var i = 0; i < node.topics.length; i++) {
+        topicArray[i] = node.topics[i].topicHeader;
+      
+    }
+   
     showForm(topicArray);
-
-   /* var s = "<select name='topicSelect' onchange='showForm(this)'>";
-    console.log(s);
-    for (var i = 0; i < node.topics.length; i++) {
-        console.log(node.topics[i]);
-
-        s += ("<option value='" + node.topics[i].topicHeader + "' >" + node.topics[i].topicHeader + "</option>");
-
-    }
-    $("#myTopic").append(s);
-    */
-    
   
 }
-function showForm(str) {
-
-    //scroll to topic & update
-
-   // console.log(str.value);
-    $('#myform').append('<div><strong>Select Topic :</strong></div>');
-    $("#myform").alpaca({
-        "schema": {
-            "type": "string",
-            "enum": str
-        },
-        "options": {
-            "type": "select",
-            "onFieldChange": function (e) {
-
-                var ind = str.indexOf(this.getValue());
-
-              //  f(this.getValue());             
-        
-
-                var title= 'topics_' + ind +"_topicHeader"; 
-                $links = $("div[data-alpaca-field-name*='" + title + "']");
  
-                $('html, body').animate({
-                    scrollTop: $links.offset().top
-                }, 'slow');
-               
-                 
-            }
-        }
-    });
 
-    
-    var f = function (viewId) {
-       
-    
+    function showForm(str) {
+
+        //scroll to topic & update
+
+        var selected_topic;
+
+          $('#myform').append('<div><strong>Select Topic :</strong></div>');
+
+        
+          $("#myform").alpaca({
+              "schema": {
+                  "type": "string",
+                  "enum": str
+              },
+              "options": {
+                  "type": "select",
+                  "onFieldChange": function (e) {
+      
+                      var ind = str.indexOf(this.getValue());
+      
+                    //  f(this.getValue());             
+                      selected_topic = this.getValue();
+      
+                      var title= 'topics_' + ind +"_topicHeader"; 
+                      $links = $("div[data-alpaca-field-name*='" + title + "']");
+      
+                      
+                     $('html, body').animate({
+                          scrollTop: $links.offset().top
+                      }, 'slow');
+                     
+                       
+                  }
+              }
+          });
+             
         $("#field1").empty();
 
         $("#field1").alpaca({
@@ -509,6 +499,208 @@ function showForm(str) {
                         "type": "string",
                         "title": "flag",
                         readonly: true
+                    },
+                    "body": {
+                        "type": "string",
+                        "title": "body",
+                        readonly: true
+                    },
+                    "topics": {
+                        "type": "array",
+                        "title": "Topics",
+                        "items": {
+                            "properties": {
+                                "topicHeader": {
+                                    "type": "string",
+                                    "title": "Topic Header",
+                                    "readonly": true
+                                },
+                                "topicTitle1": {
+                                    "type": "string",
+                                    "title": "TopicTitle" 
+                                },
+                                "items": {
+                                    "type": "array",
+                                    "title": "Callout Items",
+                                    "items": {
+                                        "type": "object",
+                                        "title": "Item",
+                                        "properties": {
+                                            "link": {
+                                                "type": "string",
+                                                "title": "Link Url"
+                                            },
+                                            "sblob": {
+                                                "type": "string",
+                                                "title": "Description"
+                                            }
+                                        }
+                                    } 
+                                },
+                                "rich_blobs": {
+                                    "items": {
+                                        "type": "string",
+                                        "title": "Items"
+                                    },
+                                    "type": "array",
+                                    "title": "Editable Callouts" 
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },              
+                "_parent": "n:node",
+                "description": "custom:testame0",
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "items": {}                
+            },
+            "options": {
+                "form": {
+                    "buttons": {
+                        "submit": {
+                            "click": function () {
+                                clearTimer();
+                                console.log("Timer Cleared");
+                                setTimer();
+                                console.log("Timer Set");
+
+                                var value = this.getValue();
+                                alert(JSON.stringify(value, null, "  "));
+
+
+                                
+                                node.name = value.name;
+                                node.heading = value.heading;
+                                node.title = value.title;
+                                node.prefix = value.prefix;
+                                node.flag = value.flag;
+                                node.body = value.body;
+                                node.topics = value.topics;
+
+                                node.update().then(function () {
+                                    alert("Form Submitted")
+                                });
+                            }
+                        }
+                    }
+                },
+                "title": "newPageTitle",
+                "engineId": "alpaca1",
+                "fields": {                    
+                    "topics": {
+                        "type": "array",
+                        "toolbarSticky": false,
+                        "items": {
+                            "fields": {
+                                "topicHeader": {
+                                    "type": "text",
+                                    "order": 1
+                                },
+                                "topicTitle1": {
+                                    "type": "text",
+                                    "onFieldChange": function (e) {                                      
+                                        var value = this.getValue();                                         
+                                    },"order":2
+                                },
+                                "items": {
+                                    "type": "array",
+                                    "toolbarSticky": false,
+                                    "items":{
+                                        "fields": {
+                                            "link": {
+                                                "type": "text",
+                                                "order": 2
+                                            },
+                                            "sblob": {
+                                                "type": "text",
+                                                "order": 1
+                                            }
+                                        }
+                                    },
+                                    "order": 4
+                                },
+                                "rich_blobs": {
+                                    "items": {
+                                        "type": "ckeditor",
+                                        "ckeditor": {
+                                            "toolbar": [
+                                                ['Bold', 'Italic', 'Underline', 'Cut', 'Copy', 'Paste'], ['NumberedList', 'BulletedList'], ['Table', 'Source']
+                                            ]
+                                        }
+                                    },
+                                    "actionbar": {
+                                        "actions": [{
+                                            "action": "add",
+                                            "enabled": false
+                                        },
+                                        {
+                                            "action": "remove",
+                                            "enabled": false
+                                        },
+                                        {
+                                            "action": "up",
+                                            "enabled": false
+                                        },
+                                        {
+                                            "action": "down",
+                                            "enabled": false
+                                        }
+                                        ]
+                                    }
+                                    ,
+                                    "order": 3
+                                }
+                            
+                            }
+                        } 
+
+                    }
+                }
+            } 
+        });
+      
+       
+    }
+
+
+    //original default edit & submit
+    function showAmexForm() {
+
+        console.log("show amex form");
+
+    
+        $("#myform").alpaca({
+            "view": "bootstrap-edit",
+            "data": node,
+            "schema": {
+                "title": "American Express",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Page Name",
+                        readonly: true
+                    },
+                    "heading": {
+                        "type": "string",
+                        "title": "Heading",
+                        readonly: true
+                    },
+                    "title": {
+                        "type": "string",
+                        "title": "Page Title",
+                        readonly: true
+                    },
+                    "prefix": {
+                        "type": "string",
+                        "title": "prefix",
+                        readonly: true
+                    },
+                    "flag": {
+                        "type": "string",
+                        "title": "flag",
+                        readonly : true
                     },
                     "body": {
                         "type": "string",
@@ -559,11 +751,11 @@ function showForm(str) {
                             "type": "object"
                         }
                     }
-                },              
-                    "_parent": "n:node",
-                    "description": "custom:testame0",
-                    "$schema": "http://json-schema.org/draft-04/schema#",
-                    "items": {}                
+                },
+                "_parent": "n:node",
+                "description": "custom:testame0",
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "items": {}
             },
             "options": {
                 "form": {
@@ -579,7 +771,26 @@ function showForm(str) {
                                 alert(JSON.stringify(value, null, "  "));
 
 
-                                
+                                //preview design feather light 
+                                //  $('#featherlight_data').modal('show');
+                                for (var i = 0; i < value.topics.length; i++) {
+                                    $('#tbl_preview').append("<tr id='tbl_preview_tr"+ i +"'><td>" + value.topics[i].topicHeader + "</td><td>" + value.topics[i].topicTitle1 + "</td>");
+                                    for (var j = 0; j < value.topics[i].items.length ; j++) {
+
+                                        $('#tbl_preview_tr' + i).append("<tr id='tbl_preview_tr_inner" + j + "'><td>" + value.topics[i].items[j].sblob + "</td><td>" + value.topics[i].items[j].link  + "</td> </tr>");
+                                        //$('#tbl_preview_tr' + i).append("<td>" + value.topics[i].items[j].link + "</td><td></td>");
+                                    }
+                                    $('#tbl_preview_tr' + i).append("<td id='tbl_preview_tr_editable"+ i +"'></td>");
+
+                                    for (var k = 0; k < value.topics[i].rich_blobs.length ; k++) {
+                                        //  console.log(k + "===" + value.topics[i].rich_blobs[k]);
+                                        $('#tbl_preview_tr_editable' + i).append("<tr id='tbl_preview_tr_editable_inner" + k + "'><td>" + value.topics[i].rich_blobs[k] + "</td></tr>");
+
+
+                                        // $('#tbl_preview_tr' + i).append("<tr id='tbl_preview_tr_editable" + j + "'><td>"  + value.topics[i].rich_blobs[k] + "</td></tr>");
+                                    }
+                                }                              
+    
                                 node.name = value.name;
                                 node.heading = value.heading;
                                 node.title = value.title;
@@ -597,30 +808,39 @@ function showForm(str) {
                 },
                 "title": "newPageTitle",
                 "engineId": "alpaca1",
-                "fields": {                    
+                "fields": {
+                    "name": {
+                        "type": "text"
+                    },
+                    "heading": {
+                        "type": "text"
+                    },
+                    "title": {
+                        "type": "text"
+                    },
+                    "prefix": {
+                        "type": "text"
+                    },
+                    "flag": {
+                        "type": "text"
+                    },
+                    "body": {
+                        "type": "text"
+                    },
                     "topics": {
                         "type": "array",
                         "toolbarSticky": false,
                         "items": {
                             "fields": {
                                 "topicTitle1": {
-                                    "type": "text",
-                                    "onFieldChange": function (e) {                                      
-                                        var value = this.getValue();                                         
-                                    }
+                                    "type": "text"
                                 },
                                 "items": {
                                     "actionbar": {
-                                        "actions": [
-                                            {
+                                        "actions": [{
                                             "action": "add",
                                             "enabled": false
-                                            },
-                                            {
-                                                "action": "remove",
-                                                "enabled": false
-                                            }
-                                        ]
+                                        }]
                                     }
                                 },
                                 "rich_blobs": {
@@ -636,283 +856,44 @@ function showForm(str) {
                                         "actions": [{
                                             "action": "add",
                                             "enabled": false
-                                        },
-                                        {
-                                            "action": "remove",
-                                            "enabled": false
                                         }]
                                     }
                                 }
-                            
-                            }
-                        } 
-
-                    }
-                }
-            } 
-        });
-    };
-    f("bootstrap-edit");
-
-    
-     
-}
-
-
-//original default edit & submit
-function showAmexForm() {
-
-    console.log("show amex form");
-
-    
-    $("#myform").alpaca({
-        "view": "bootstrap-edit",
-        "data": node,
-        "schema": {
-            "title": "American Express",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "title": "Page Name",
-                    readonly: true
-                },
-                "heading": {
-                    "type": "string",
-                    "title": "Heading",
-                    readonly: true
-                },
-                "title": {
-                    "type": "string",
-                    "title": "Page Title",
-                    readonly: true
-                },
-                "prefix": {
-                    "type": "string",
-                    "title": "prefix",
-                    readonly: true
-                },
-                "flag": {
-                    "type": "string",
-                    "title": "flag",
-                    readonly : true
-                },
-                "body": {
-                    "type": "string",
-                    "title": "body",
-                    readonly: true
-                },
-                "topics": {
-                    "type": "array",
-                    "title": "Topics",
-                    "items": {
-                        "properties": {
-                            "topicHeader": {
-                                "type": "string",
-                                "title": "Topic Header",
-                                readonly: true
-                            },
-                            "topicTitle1": {
-                                "type": "string",
-                                "title": "TopicTitle"
-                            },
-                            "items": {
-                                "type": "array",
-                                "title": "Callout Items",
-                                "items": {
-                                    "type": "object",
-                                    "title": "Item",
-                                    "properties": {
-                                        "link": {
-                                            "type": "string",
-                                            "title": "Link Url"
-                                        },
-                                        "sblob": {
-                                            "type": "string",
-                                            "title": "Description"
-                                        }
-                                    }
-                                }
-                            },
-                            "rich_blobs": {
-                                "items": {
-                                    "type": "string",
-                                    "title": "Items"
-                                },
-                                "type": "array",
-                                "title": "Editable Callouts"
-                            }
-                        },
-                        "type": "object"
-                    }
-                }
-            },
-            "_parent": "n:node",
-            "description": "custom:testame0",
-            "$schema": "http://json-schema.org/draft-04/schema#",
-            "items": {}
-        },
-        "options": {
-            "form": {
-                "buttons": {
-                    "submit": {
-                        "click": function () {
-                            clearTimer();
-                            console.log("Timer Cleared");
-                            setTimer();
-                            console.log("Timer Set");
-
-                            var value = this.getValue();
-                            alert(JSON.stringify(value, null, "  "));
-
-
-                            //preview design feather light 
-                            //  $('#featherlight_data').modal('show');
-                            for (var i = 0; i < value.topics.length; i++) {
-                                $('#tbl_preview').append("<tr id='tbl_preview_tr"+ i +"'><td>" + value.topics[i].topicHeader + "</td><td>" + value.topics[i].topicTitle1 + "</td>");
-                                for (var j = 0; j < value.topics[i].items.length ; j++) {
-
-                                    $('#tbl_preview_tr' + i).append("<tr id='tbl_preview_tr_inner" + j + "'><td>" + value.topics[i].items[j].sblob + "</td><td>" + value.topics[i].items[j].link  + "</td> </tr>");
-                                    //$('#tbl_preview_tr' + i).append("<td>" + value.topics[i].items[j].link + "</td><td></td>");
-                                }
-                                $('#tbl_preview_tr' + i).append("<td id='tbl_preview_tr_editable"+ i +"'></td>");
-
-                                for (var k = 0; k < value.topics[i].rich_blobs.length ; k++) {
-                                    //  console.log(k + "===" + value.topics[i].rich_blobs[k]);
-                                    $('#tbl_preview_tr_editable' + i).append("<tr id='tbl_preview_tr_editable_inner" + k + "'><td>" + value.topics[i].rich_blobs[k] + "</td></tr>");
-
-
-                                    // $('#tbl_preview_tr' + i).append("<tr id='tbl_preview_tr_editable" + j + "'><td>"  + value.topics[i].rich_blobs[k] + "</td></tr>");
-                                }
-                            }
-
-
-                            /* modal view
-                            $('.lbcontent').append(
-                                "<div><h3>" + value.title + "</h3><h4>Topics</h4></div>");
-
-
-                            for (var x = 0 ; x < value.topics.length ; x++) {
-
-                                $('.lbcontent').append("<div><h4>TopicHeader" + x +"</h4>" + value.topics[x].topicHeader + "</div>");
-                                $('.lbcontent').append("<div><h4>TopicTitle</h4>" + value.topics[x].topicTitle1+"</div>");
-                                
-                                for (var i = 0; i < value.topics[x].items.length ; i++) {
-                                    $('.lbcontent').append("<div><span>Item" + i + ":  " + value.topics[x].items[i].sblob + "</span></div>");
-                                    $('.lbcontent').append("<div><span>Link" + i + ":" + value.topics[x].items[i].link + "</span></div>");
-                                }
-                             
-                                 
-                                for (var j = 0; j < value.topics[x].rich_blobs.length ; j++) {
-                                    $('.lbcontent').append("<div><span>Editable callout" + i + ":" + value.topics[x].rich_blobs[j] + "</span></div>");
-                                } 
-                            }*/
-                            //alert(JSON.stringify(node));
-                           
-    
-                            node.name = value.name;
-                            node.heading = value.heading;
-                            node.title = value.title;
-                            node.prefix = value.prefix;
-                            node.flag = value.flag;
-                            node.body = value.body;
-                            node.topics = value.topics;
-
-                            node.update().then(function () {
-                                alert("Form Submitted")
-                            });
-                        }
-                    }
-                }
-            },
-            "title": "newPageTitle",
-            "engineId": "alpaca1",
-            "fields": {
-                "name": {
-                    "type": "text"
-                },
-                "heading": {
-                    "type": "text"
-                },
-                "title": {
-                    "type": "text"
-                },
-                "prefix": {
-                    "type": "text"
-                },
-                "flag": {
-                    "type": "text"
-                },
-                "body": {
-                    "type": "text"
-                },
-                "topics": {
-                    "type": "array",
-                    "toolbarSticky": false,
-                    "items": {
-                        "fields": {
-                            "topicTitle1": {
-                                "type": "text"
-                            },
-                            "items": {
-                                "actionbar": {
-                                    "actions": [{
-                                        "action": "add",
-                                        "enabled": false
-                                    }]
-                                }
-                            },
-                            "rich_blobs": {
-                                "items": {
-                                    "type": "ckeditor",
-                                    "ckeditor": {
-                                        "toolbar": [
-                                            ['Bold', 'Italic', 'Underline', 'Cut', 'Copy', 'Paste'], ['NumberedList', 'BulletedList'], ['Table', 'Source']
-                                        ]
-                                    }
-                                },
-                                "actionbar": {
-                                    "actions": [{
-                                        "action": "add",
-                                        "enabled": false
-                                    }]
-                                }
                             }
                         }
                     }
                 }
-            }
-        },
-        "postRender": function (control) {
+            },
+            "postRender": function (control) {
 
-            //style topics 
-            var n = control.childrenByPropertyId["topics"].children;
+                //style topics 
+                var n = control.childrenByPropertyId["topics"].children;
             
-            for (var i = 0; i < n.length ; i++) {
-                n[i].children[0].getFieldEl().addClass('orangeBackground');
-                n[i].children[1].getFieldEl().addClass('orangeBackground');                
-                n[i].children[3].getFieldEl().addClass('orangeBackground1');
-                n[i].children[2].getFieldEl().addClass('orangeBackground1');
+                for (var i = 0; i < n.length ; i++) {
+                    n[i].children[0].getFieldEl().addClass('orangeBackground');
+                    n[i].children[1].getFieldEl().addClass('orangeBackground');                
+                    n[i].children[3].getFieldEl().addClass('orangeBackground1');
+                    n[i].children[2].getFieldEl().addClass('orangeBackground1');
 
                 
 
-                console.log(n[i].children[3].childrenByPropertyId['rich_blobs']);
-                console.log(n[i]);
+                    console.log(n[i].children[3].childrenByPropertyId['rich_blobs']);
+                    console.log(n[i]);
 
-                for (var j = 0; j < n[i].children[3].length; j++) {                
-                    n[i].children[3].children[j].getFieldEl().css("background-color", "lightgreen");
+                    for (var j = 0; j < n[i].children[3].length; j++) {                
+                        n[i].children[3].children[j].getFieldEl().css("background-color", "lightgreen");
+                    }
+
+                
                 }
-
-                
-            }
      
-            //control.childrenByPropertyId["topics"].getFieldEl().addClass('orangeBackground');
-        }
-    });
+                //control.childrenByPropertyId["topics"].getFieldEl().addClass('orangeBackground');
+            }
+        });
 
   
     
-}
+    }
  
 
 
@@ -1030,8 +1011,19 @@ function showAmexForm() {
             case 'docx':
                 console.log('docx file type allowed');
                 break;
+            case 'png':
+                console.log('png file type allowed');
+                break;
+            case 'JPG':
+                console.log('jpg file type allowed');
+                break;
+            case 'jpeg':
+                console.log('jpeg file type allowed');
+                break;
+
+
             default:
-                alert('Pdf , doc or xls/xlsx files may be uploaded');
+                alert('Pdf , doc or xls/xlsx , png ,jpg files may be uploaded');
                 this.value = '';
         }
     };
