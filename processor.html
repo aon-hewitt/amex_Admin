@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <!--<script src="js/jquery.min.js"></script>-->
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/gitana.min.js"></script>
+    <script>
+        var platform;
+        var repository;
+        var branch;
+        var node;
+        var swapNode;
+        var repositoryId = 'f2c3571d7a2955e7f8a1';
+        var branchId = '7935c19b649b9c399528';
+
+
+
+        var draftNodeId;
+        var coreNodeId;
+        var draftStringPresentValue;
+
+
+
+        function swapData() {
+            var config = {
+                "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
+                "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
+                "username": "johnvogen",
+                "password": "x24ya999",
+                "baseURL": "https://api.cloudcms.com",
+                "application": "c8a4dc1dd5644f2934be"
+            }
+
+            Gitana.connect(config, function(err) {
+                if (err) {
+                    console.log("Error: " + err + window.location.href);
+                    return;
+                }
+            }).then(function() {
+                platform = this;
+                this.readRepository(repositoryId).then(function() {
+                    repository = this;
+                    this.readBranch(branchId).then(function() {
+                        branch = this;
+                                node = this.readNode(coreNodeId).then(function () {
+
+                                    swapNode = branch.readNode(draftNodeId).then(function () {
+
+                                        alert("Changing data on node " + node._doc + "with data from " + swapNode._doc);
+                                        node.name = swapNode.name;
+                                        node.heading = swapNode.heading;
+                                        node.title = swapNode.title;
+                                        node.prefix = swapNode.prefix;
+                                        //node.flag = swapNode.flag; //the draft flag should not be swapped in
+                                        node.body = swapNode.body;
+                                        node.topics = swapNode.topics;
+                                        debugger;
+                                        node.update().then(function () {
+                                            alert("node updated");
+                                        });
+                                    });
+                                });
+                    });
+                });
+            });
+        }
+
+
+        function processQueryString() {
+            queryStringPresent();
+            if (draftStringPresentValue == true) {
+                swapData();
+            }
+        }
+
+        function queryStringPresent() {
+
+            var query = window.location.search.substring(1);
+
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == 'draft') {
+                    draftNodeId = pair[1];
+                    draftStringPresentValue = true;
+                } else if (decodeURIComponent(pair[0]) == 'core') {
+                    coreNodeId = pair[1];
+                }
+            }
+        }
+
+
+    </script>
+
+
+
+</head>
+<body onload="processQueryString()">
+
+</body>
+</html>
