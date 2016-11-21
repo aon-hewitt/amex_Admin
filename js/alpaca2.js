@@ -1118,13 +1118,25 @@ fl.onchange = function (e) {
         case 'docx':
             console.log('docx file type allowed');
             break;
+     
         case 'png':
             console.log('png file type allowed');
             break;
+        case 'PNG':
+            console.log('png file type allowed');
+            break;
+
         case 'JPG':
             console.log('jpg file type allowed');
             break;
+        case 'jpg':
+            console.log('jpg file type allowed');
+            break;
         case 'jpeg':
+            console.log('jpeg file type allowed');
+            break;
+
+        case 'JPEG':
             console.log('jpeg file type allowed');
             break;
 
@@ -1143,7 +1155,7 @@ $("#uploadFilenameEdit5").on('change keyup paste mouseup', function () {
 
 
 //This is form upload scripting here--------------------------------------------
-var ContainerId = '38c4dcb1494d4d5b304e';
+var ContainerId = 'fd1f6aafd2b6e54d0c71';
 
 function submitForm() {
     var formData = new FormData($("#frmeditSubmitForm5")[0]);
