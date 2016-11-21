@@ -454,8 +454,10 @@ function showTopic(topic) {
 
     var f = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='" + topic_id + "']");
     f.css('display', 'block');
-    console.log($('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid'))
-    console.log($('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='" + topic_id + "_items_'"+ +"']"));
+    f.css('border', '4px solid #F0A59C');
+    f.css('border-radius','10px');
+    //console.log($('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid'))
+    //console.log($('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='" + topic_id + "_items_'"+ +"']"));
 }
 function showForm(count) {
  
@@ -1066,7 +1068,7 @@ $("#uploadFilenameEdit5").on('change keyup paste mouseup', function () {
 
 
 //This is form upload scripting here--------------------------------------------
-var pdfContainerId = 'c405f23f5687d5167cd1';
+var ContainerId = '38c4dcb1494d4d5b304e';
 
 function submitForm() {
     var formData = new FormData($("#frmeditSubmitForm5")[0]);
@@ -1089,7 +1091,7 @@ function submitForm() {
 
     $.ajax({
         type: "POST",
-        url: "https://api.cloudcms.com/repositories/" + repositoryId + "/branches/" + branchId + "/nodes/" + pdfContainerId + "/attachments/" + ($("#uploadFilenameEdit5").val()).replace(" ", "_") + "/",
+        url: "https://api.cloudcms.com/repositories/" + repositoryId + "/branches/" + branchId + "/nodes/" + ContainerId + "/attachments/" + ($("#uploadFilenameEdit5").val()).replace(" ", "_") + "/",
         data: formData,
         contentType: false,
         processData: false,
