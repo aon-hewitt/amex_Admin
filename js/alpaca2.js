@@ -593,7 +593,9 @@ function showForm(count) {
                             }).then(function () {
                                 console.log("Showing preview at QA site");
                                 draftNodeId = this._doc;                                
-                                window.open('http://qa.aonhewittdev.com:10080/amextest/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
+                                //window.open('http://qa.aonhewittdev.com:10080/amextest/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
+                                window.open('http://qa.ah-prod.com:10080/amex/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
+
                             });
                         }
                     },
