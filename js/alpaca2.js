@@ -620,7 +620,7 @@ function showForm(count) {
                             //node.topics = value.topics;
                             sendEmail(); //object must be created on cloudCMS before email can be sent
                             //node.update().then(function () {
-                            //    alert("Form Submitted")
+                                alert("Thank you for submitting an update. Please check your email for a verification link. Just click on the link to deploy your update!")
                             //});
                         }
                     }
