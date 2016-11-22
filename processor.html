@@ -48,7 +48,7 @@
 
                                     swapNode = branch.readNode(draftNodeId).then(function () {
 
-                                        alert("Changing data on node " + node._doc + "with data from " + swapNode._doc);
+                                        console.log("Changing data on node " + node._doc + "with data from " + swapNode._doc);
                                         node.name = swapNode.name;
                                         node.heading = swapNode.heading;
                                         node.title = swapNode.title;
@@ -56,9 +56,9 @@
                                         //node.flag = swapNode.flag; //the draft flag should not be swapped in
                                         node.body = swapNode.body;
                                         node.topics = swapNode.topics;
-                                        debugger;
                                         node.update().then(function () {
-                                            alert("node updated");
+                                            console.log("node updated");
+                                            $("#message").css("display", "block");
                                         });
                                     });
                                 });
@@ -98,6 +98,6 @@
 
 </head>
 <body onload="processQueryString()">
-
+    <div id="message" style="display:none"><strong>Thank you</strong> for confirming your update to the site. Please close all browser windows and reload the site to view your updated content.</div>
 </body>
 </html>
