@@ -87,26 +87,28 @@ function getPage(callback) {
 }
 
 var myData = {
-    "a42ecce24ae285aea068": "HomePage",
+    "a42ecce24ae285aea068": "Home Page",
     //"d9275c2e2cac27215841": "American Express",
     "35fdcd1a842f9bd38093": "Be Healthier",
     "24faf2f946aaaf4df61c": "Care for Family",
     "e598bce4cbbc130ca67c": "Chat Money Expert",
     "2f459081ab8e3cbe5e44": "Contact Us",
-    "baee9580b9b08558d6a1": "Core Benefits",
+//    "baee9580b9b08558d6a1": "Core Benefits",
+    "2862657ea64547039eeb": "Core Benefits",
     "5e9bfb25da6e1274d3bf": "Education Benefits",
     "27936ab42ee296645389": "Family Expense",
     "4504e3b77aa2bbd9592f": "Get Help Health Care",
     "8399f467a5165c36718f": "Get Ready To Enroll",
     "c4428f3933404834e0db": "Get Specialized Health",
     "fc3b2067976ea86d472f": "Lower Expenses",
-    "1ff9c71fef8aadd38466": "Pregnancy Adoption Benefits",
-    "cd9b943b651016db032e": "Protect family Financially",
+  //  "1ff9c71fef8aadd38466": "Pregnancy Adoption Benefits",
+    "d231c85476b339833325": "Pregnancy Adoption Benefits",
+    "cd9b943b651016db032e": "Protect Family Financially",
     "9706e1042e10ba5483df": "Save For The Future",
     "341faff00653a2a45b04": "See Doctor",
     "8fc2f47c2238f5614da0": "Special Support For Family",
-    "fdc79e68d1f59a1c5c35": "Spend money",
-    "bd12b9dd3b85c86c169b": "Get_Help_Health_Care2"
+    "fdc79e68d1f59a1c5c35": "Spend money"
+    //"bd12b9dd3b85c86c169b": "Get_Help_Health_Care2"
 
 }
 
@@ -171,6 +173,7 @@ function reShowForm() {
                     if (node.heading == 'HomePage') {
                         showHomePage();
                     } else {
+                        $('#topics').html("");
                         showDrop();
                     }
                 });
@@ -241,15 +244,15 @@ function showHomePage() {
                             },
                             "imageP": {
                                 "type": "string",
-                                "title": "Image1stParagraph"
+                                "title": "Heading Above"
                             },
                             "imageH": {
                                 "type": "string",
-                                "title": "ImageHeading"
+                                "title": "Heading Styled"
                             },
                             "imageP2": {
                                 "type": "string",
-                                "title": "Image2ndParagraph"
+                                "title": "Heading Below"
                             },
                             "imageLink": {
                                 "type": "string",
@@ -261,7 +264,7 @@ function showHomePage() {
                 },
                 "forHealth": {
                     "type": "array",
-                    "title": "HealthTile",
+                    "title": "Health Tile",
                     "items": {
                         "properties": {
                             "link": {
@@ -278,7 +281,7 @@ function showHomePage() {
                 },
                 "forMoney": {
                     "type": "array",
-                    "title": "MoneyTile",
+                    "title": "Money Tile",
                     "items": {
                         "properties": {
                             "link": {
@@ -295,7 +298,7 @@ function showHomePage() {
                 },
                 "forFamily": {
                     "type": "array",
-                    "title": "FamilyTile",
+                    "title": "Family Tile",
                     "items": {
                         "properties": {
                             "link": {
@@ -420,9 +423,9 @@ function showHomePage() {
 
 
             }
-        }
+        } 
     });
-
+    
 
 }
 function showDrop() {
@@ -430,15 +433,18 @@ function showDrop() {
     //console.log(node.topics);
 
     $("#myform").css('visibility', 'visible');
+
     var topicArray = new Array();
     $("#topics").append("<option value='none" + i + "'> None </option>");
     for (var i = 0; i < node.topics.length; i++) {
         topicArray[i] = node.topics[i].topicHeader;
-        $("#topics").append("<option value='topics_" + i + "'>" + node.topics[i].topicHeader + " </option>");
-
-        //console.log('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid[data-alpaca-field-name="topics_"' + i + "'");
-
-       
+        if (topicArray[i] === undefined) {
+            $("#topics").append("<option value='default'>Default</option>");
+        }
+        else{
+               $("#topics").append("<option value='topics_" + i + "'>" + node.topics[i].topicHeader + " </option>");
+            }
+      
     }
 
     showForm(i);
@@ -449,31 +455,51 @@ function showTopic(topic) {
 
    
     var topic_id = topic.options[topic.selectedIndex].getAttribute('value');
-    
-    //close any open topics
-    for (var t = 0; t < topic.options.length ; t++) {
+ 
+       //close any open topics
+        for (var t = 0; t < topic.options.length ; t++) {
 
-        var field = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='topics_" + t + "']");
-       
-        if (field.css('display') == 'block') {
-            field.css('display', 'none');
-        }
-        else {
-           // console.log('off');
+            var field = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='topics_" + t + "']");
+
+            if (field.css('display') == 'block') {
+                field.css('display', 'none');
+            }
+            else {
+               // console.log('off');
+            }
+
         }
 
+        //check if default (ie get ready enroll page )then show everything
+        if (topic_id === 'default') { 
+            var f = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='topics_0']");
+            f.css('display', 'block');
+            f.css('border', '4px solid #F0A59C');
+            f.css('border-radius', '10px');
+            $('.alpaca-form-buttons-container').css('display', 'block');
+
+            //set topic title as readonly
+            var elem = $('input[name="topics_0_topicTitle1"]');
+            elem.attr('disabled', true);
+
+
+
+        } else {
+
+            var f = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='" + topic_id + "']");
+            f.css('display', 'block');
+            f.css('border', '4px solid #F0A59C');
+            f.css('border-radius', '10px');
+            $('.alpaca-form-buttons-container').css('display', 'block');
     }
 
-    var f = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='" + topic_id + "']");
-    f.css('display', 'block');
-    f.css('border', '4px solid #F0A59C');
-    f.css('border-radius','10px');
-    //console.log($('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid'))
-    //console.log($('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='" + topic_id + "_items_'"+ +"']"));
+   
+    
+   
 }
 function showForm(count) {
 
-    console.log("show showForm form");
+    console.log("showForm");
 
  
     $("#field1").empty();
@@ -482,7 +508,7 @@ function showForm(count) {
         "view": "bootstrap-edit",
         "data": node,
         "schema": {
-            "title": "American Express",
+            "title": "",
             "type": "object",
             "properties": {
                 "name": {
@@ -517,7 +543,7 @@ function showForm(count) {
                 },
                 "topics": {
                     "type": "array",
-                    "title": "Topics",
+                    "title": "",
                     "items": {
                         "properties": {
                             "topicHeader": {
@@ -686,39 +712,35 @@ function showForm(count) {
             }
         },
         "postRender": function (control) {
+
+
+            var a = control.childrenByPropertyId["topics"];
+            //a.getFieldEl().css('display', 'none');
+
             var n = control.childrenByPropertyId["topics"].children;
             
              
             for (var i = 0; i < n.length ; i++) {
 
-             //  console.log( n[i].children[3].children.length);
-                //n[i].children[2].getFieldEl().addClass('orangeBackground1');
-
-                n[i].getFieldEl().css('display', 'none');
+                   n[i].getFieldEl().css('display', 'none');
                 
-                
-                console.log(n[i].children[3].children[j]);
+                //hide empty items  
 
                 for (var j = 0; j < n[i].children[3].children.length ; j++) {
-                    
-                    if (n[i].children[3].children[j].data == '') {
-                        console.log('empty' + j);
+                   var $this = n[i].children[3].children[j];
+                   if ($this.childrenByPropertyId["sblob"].data == null && $this.childrenByPropertyId["link"].data == null) {
+                      // console.log('both empty' + j);
+                       n[i].children[3].children[j].getFieldEl().css('display', 'none');
                     } else {
-                        console.log(n[i].children[3].children[j].data);
-                        }
-                }
+                       // console.log($this.childrenByPropertyId["sblob"].data);
+
+                   }
+
+                } 
             }
 
 
-            /*
-            for (var cnt = 0; cnt < count ; cnt++) {
-
-                console.log(cnt);
-                var a = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='topics_" + cnt + "']");
-                console.log(a);
-                a.addClass('nTop');
-                a.css('visibility', 'hidden');
-            }*/
+            
         }
     });
 
@@ -992,12 +1014,6 @@ function showAmexForm() {
 
 
 
-
-$('.featherlight-close').on('click', function () {
-    $('.featherlight-close').click();
-});
-
-
 function checkCookie() {
 
     if (performance.navigation.type == 1) {
@@ -1177,3 +1193,14 @@ function submitForm() {
 }
 
 //This ends form upload scripting-----------------------------------------------
+
+
+function copyToClipboard(element) {
+    if ($("#uploadFilenameEdit5").val() !== "") {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+}

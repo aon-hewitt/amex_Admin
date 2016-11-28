@@ -28,11 +28,14 @@
         {
             background-color: transparent;
         }
-        
-        .alpaca-field-array
-        {
+
+        .alpaca-field-array {
             background-color: transparent;
+            border: 0px;
         }
+        .alpaca-form-buttons-container {
+            display: none;
+}
         
         #logout
         {
@@ -76,18 +79,10 @@
             color: #bbb;
             margin-top: 20%;
         }
-        .alpaca-field-array {
-            border-radius:10px;
-        }
+        
 
-        /* style to differentiate topics */
-
-        [data-alpaca-container-item-name ='topics'].alpaca-container-item.alpaca-container-item-last {
-               border: 4px solid #F86757;
-               border-radius:10px;
-        }
-
-
+        /* style to differentiate topics */ 
+     
         [data-alpaca-field-path ^= "/topics"].alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid {
     
            margin-top:20px;
@@ -120,32 +115,32 @@
         [data-alpaca-container-item-name='prefix'].alpaca-container-item,
         [data-alpaca-container-item-name='flag'].alpaca-container-item ,
         [data-alpaca-container-item-name='name'].alpaca-container-item ,
-        [data-alpaca-container-item-name='heading'].alpaca-container-item {
+        [data-alpaca-container-item-name='heading'].alpaca-container-item,
+        [data-alpaca-container-item-name='title'].alpaca-container-item {
             display:none;
         }
-
-/*        [data-alpaca-container-item-name='topics'].alpaca-container-item {
-            visibility:hidden;
-        }*/
+ 
          [data-alpaca-field-name *= "banner_"].alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid {
-                border:2px solid rgba(19, 77, 104, 0.78);
+            border:2px solid rgba(19, 77, 104, 0.78);
          }
-           [data-alpaca-field-name = "banner"].alpaca-field.alpaca-field-array.alpaca-optional.alpaca-field-valid {
-                border: 3px solid rgba(141, 91, 0, 0.66);
-            }
-
-
+         [data-alpaca-field-name = "banner"].alpaca-field.alpaca-field-array.alpaca-optional.alpaca-field-valid {
+            border: 3px solid rgba(141, 91, 0, 0.66);
+         }
+        [data-alpaca-field-name = "banner"] legend.alpaca-container-label, [data-alpaca-field-name = "forHealth"] legend.alpaca-container-label ,
+         [data-alpaca-field-name = "forMoney"] legend.alpaca-container-label, [data-alpaca-field-name = "forFamily"] legend.alpaca-container-label
+        {
+            display:block;
+        }
           [data-alpaca-field-name = "forHealth"].alpaca-field.alpaca-field-array.alpaca-optional.alpaca-field-valid {
-               border: 3px solid #009bbb;
-
+            border: 3px solid #009bbb;
           }
           [data-alpaca-field-name = "forMoney"].alpaca-field.alpaca-field-array.alpaca-optional.alpaca-field-valid {
             border: 3px solid #3f9c35;
-            }
+          }
 
           [data-alpaca-field-name = "forFamily"].alpaca-field.alpaca-field-array.alpaca-optional.alpaca-field-valid {
             border: 3px solid #a72e9c;
-            }
+          }
 
 
         /* home page style ends here*/
@@ -237,25 +232,34 @@
                                         <input type="text" name="uploadFilename5" id="uploadFilenameEdit5">
                                         <br>
                                         <br>
-                                        To create a link to the file in the page editor copy/paste this customized link
+                                        To create a link to the file in the page editor click on copy and paste this customized link
                                         into the link field:
                                         <br>
                                         <!--https://api.cloudcms.com/repositories/e083f23fc5141afe5d22/branches/fcf1c3fb882fd40ecf97/nodes/f2585ff41013540945ab/attachments/
                                         <span id="myFileName"></span>/-->
 
-                                        <nobr>https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=<span id="myFileName"></span> </nobr>
+                                     
+                                    
+
+
+                                        <!-- <nobr>https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=<span id="myFileName"></span> </nobr>-->
                                         <br>
                                     </label>
+                                       <p id="p1" style="display:none">
+                                            https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=<span id="myFileName"></span>                                          
+                                        </p>
                                 </div>
                                 <div>
-                                    <input id="mySubmitButton" name="mySubmit" type="submit" value="Submit">
+                                    <input id="mySubmitButton" name="mySubmit" type="submit" value="Submit"> 
+                                    <input type="button" onclick="copyToClipboard('#p1')" value="Copy">
+                                     
                                 </div>
                                 </form>
                                 <script>
-                                    $("#frmeditSubmitForm5").submit(function (event) {
-                                        alert('Resource Uploaded');
-                                        event.preventDefault(); // Prevent the form from submitting via the browser.
-                                        submitForm();
+                                    $("#frmeditSubmitForm5").submit(function (event) {                                       
+                                            alert('Resource Uploaded');
+                                            event.preventDefault(); // Prevent the form from submitting via the browser.
+                                            submitForm();                                        
                                     });
 
                                 </script>
