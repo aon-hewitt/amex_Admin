@@ -593,7 +593,6 @@ function showForm(count) {
                             }).then(function () {
                                 console.log("Showing preview at QA site");
                                 draftNodeId = this._doc;                                
-                                //window.open('http://qa.aonhewittdev.com:10080/amextest/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
                                 window.open('http://qa.ah-prod.com:10080/amex/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
 
                             });
@@ -607,21 +606,8 @@ function showForm(count) {
                             console.log("Timer Set");
 
                             var value = this.getValue();
-                            //alert(JSON.stringify(value, null, "  "));
-
-
-
-                            //node.name = value.name;
-                            //node.heading = value.heading;
-                            //node.title = value.title;
-                            //node.prefix = value.prefix;
-                            //node.flag = value.flag;
-                            //node.body = value.body;
-                            //node.topics = value.topics;
                             sendEmail(); //object must be created on cloudCMS before email can be sent
-                            //node.update().then(function () {
-                                alert("Thank you for submitting an update. Please check your email for a verification link. Just click on the link to deploy your update!")
-                            //});
+                            alert("Thank you for submitting an update. Please check your email for a verification link. Just click on the link to deploy your update!")
                         }
                     }
                 }
