@@ -32,20 +32,20 @@ var draftNodeId;
 
 function getPage(callback) {
 
-                var config = {
-                "username": username,
-                "password": password,
-                "baseURL": "/proxy"
-                        }
+                //var config = {
+                //"username": username,
+                //"password": password,
+                //"baseURL": "/proxy"
+                //        }
 
-    //var config = {
-    //    "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
-    //    "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
-    //    "username": username,
-    //    "password": password,
-    //    "baseURL": "https://api.cloudcms.com",
-    //    "application": "c8a4dc1dd5644f2934be"
-    //}
+    var config = {
+        "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
+        "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
+        "username": username,
+        "password": password,
+        "baseURL": "https://api.cloudcms.com",
+        "application": "c8a4dc1dd5644f2934be"
+    }
 
     Gitana.connect(config, function (err) {
         if (err) {
@@ -448,7 +448,7 @@ function showDrop() {
     }
 
     showForm(i);
-
+    
 }
 
 function showTopic(topic) {
@@ -498,6 +498,7 @@ function showTopic(topic) {
    
 }
 function showForm(count) {
+    
 
     console.log("showForm");
 
@@ -618,14 +619,17 @@ function showForm(count) {
                                 "_type": 'custom:testame0'
                             }).then(function () {
                                 console.log("Showing preview at QA site");
-                                $(".alpaca-form-button-submit").css({ "opacity": "1", "cursor": "pointer" });
+                                $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;                                
                                 window.open('http://qa.ah-prod.com:10080/amex/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
 
                             });
                         }
                     },
-                    "submit": {
+                    "Approve": {
+                        "attributes": {
+                            "disabled": "disabled"
+                        },
                         "click": function () {
                             clearTimer();
                             console.log("Timer Cleared");
@@ -714,7 +718,6 @@ function showForm(count) {
         },
         "postRender": function (control) {
 
-
             var a = control.childrenByPropertyId["topics"];
             //a.getFieldEl().css('display', 'none');
 
@@ -745,9 +748,11 @@ function showForm(count) {
         }
     });
 
+   
  
     //$("#field1").css("visibility", "hidden");
     $('.alpaca-form-button-Preview').append('Preview');
+    $('.alpaca-form-button-Approve').append('Approve');
 }
  
 
