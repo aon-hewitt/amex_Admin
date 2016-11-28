@@ -618,6 +618,7 @@ function showForm(count) {
                                 "_type": 'custom:testame0'
                             }).then(function () {
                                 console.log("Showing preview at QA site");
+                                $(".alpaca-form-button-submit").css({ "opacity": "1", "cursor": "pointer" });
                                 draftNodeId = this._doc;                                
                                 window.open('http://qa.ah-prod.com:10080/amex/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
 
