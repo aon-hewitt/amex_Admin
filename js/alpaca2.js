@@ -170,7 +170,8 @@ function reShowForm() {
 
                 node = branch.readNode(pageIdToLoad).then(function () {
                     //showAmexForm();
-                    if (node.heading == 'HomePage') {
+                    
+                    if (node.name === 'index') {
                         showHomePage();
                     } else {
                         $('#topics').html("");
