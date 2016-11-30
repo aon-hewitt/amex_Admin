@@ -776,7 +776,8 @@ function sendEmail() {
             this.addResource(node);
             var data = {
                 "coreNodeId": node._doc,
-                "draftNodeId": draftNodeId
+                "draftNodeId": draftNodeId,
+                "email": platform.getDriver().authInfo.principalId
             }
             this.start(data).then(function () {
 
