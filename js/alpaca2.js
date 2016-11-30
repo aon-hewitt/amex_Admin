@@ -125,7 +125,7 @@ $("#myDropdown").change(loadPage);
 
 function loadPage() {
 
-    pageIdToLoad = $("#alpaca1").val() || "21f5c2a082ab59f6391b";
+    pageIdToLoad = $("#alpaca1").val() || "a42ecce24ae285aea068";
 
     reShowForm();
 
@@ -171,7 +171,7 @@ function reShowForm() {
                 node = branch.readNode(pageIdToLoad).then(function () {
                     //showAmexForm();
                     
-                    if (node.name === 'index') {
+                    if (pageIdToLoad === 'a42ecce24ae285aea068') {
                         showHomePage();
                     } else {
                         $('#topics').html("");
