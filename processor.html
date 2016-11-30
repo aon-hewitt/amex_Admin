@@ -59,18 +59,45 @@
 
                                     swapNode = branch.readNode(draftNodeId).then(function () {
 
-                                        console.log("Changing data on node " + node._doc + "with data from " + swapNode._doc);
-                                        node.name = swapNode.name;
-                                        node.heading = swapNode.heading;
-                                        node.title = swapNode.title;
-                                        node.prefix = swapNode.prefix;
-                                        //node.flag = swapNode.flag; //the draft flag should not be swapped in
-                                        node.body = swapNode.body;
-                                        node.topics = swapNode.topics;
-                                        node.update().then(function () {
-                                            console.log("node updated");
-                                            $("#message").css("display", "block");
-                                        });
+                                        if (coreNodeId == "a42ecce24ae285aea068") {//Home page swap
+                                            console.log("Changing data on node " + node._doc + "with data from " + swapNode._doc);
+                                            node.name = swapNode.name;
+                                            node.heading = swapNode.heading;
+                                            node.title = swapNode.title;
+                                            node.prefix = swapNode.prefix;
+                                            //node.flag = swapNode.flag; //the draft flag should not be swapped in
+                                            node.body = swapNode.body;
+                                            node.banner = swapNode.banner;
+                                            node.forHealth = swapNode.forHealth;
+                                            node.forMoney = swapNode.forMoney;
+                                            node.forFamily = swapNode.forFamily;
+                                            node.update().then(function () {
+                                                console.log("node updated");
+                                                $("#message").css("display", "block");
+                                            });
+
+                                        } else {
+                                            console.log("Changing data on node " + node._doc + "with data from " + swapNode._doc);
+                                            node.name = swapNode.name;
+                                            node.heading = swapNode.heading;
+                                            node.title = swapNode.title;
+                                            node.prefix = swapNode.prefix;
+                                            //node.flag = swapNode.flag; //the draft flag should not be swapped in
+                                            node.body = swapNode.body;
+                                            node.topics = swapNode.topics;
+                                            node.update().then(function () {
+                                                console.log("node updated");
+                                                $("#message").css("display", "block");
+                                            });
+
+                                        }
+
+
+                                        
+
+
+
+
                                     });
                                 });
                     });

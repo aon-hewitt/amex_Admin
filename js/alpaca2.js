@@ -324,7 +324,43 @@ function showHomePage() {
         "options": {
             "form": {
                 "buttons": {
-                    "submit": {
+                    "Preview": {
+                        "click": function () {
+                            clearTimer();
+                            console.log("Timer Cleared");
+                            setTimer();
+                            console.log("Timer Set");
+
+                            value = this.getValue();
+
+                            var valueJson = JSON.stringify(value);
+                            console.log(valueJson);
+
+
+                            branch.createNode({
+                                "name": value.name,
+                                "heading": value.heading,
+                                "title": value.title,
+                                "prefix": value.prefix,
+                                "flag": 'amexPage1Draft',
+                                "body": value.body,
+                                "banner": value.banner,
+                                "forHealth": value.forHealth,
+                                "forMoney": value.forMoney,
+                                "forFamily": value.forFamily,
+                                "_type": 'custom:homepageame0'
+                            }).then(function () {
+                                console.log("Showing preview of Homepage at QA site");
+                                $('.alpaca-form-button-Approve').removeAttr("disabled");
+                                draftNodeId = this._doc;
+                                window.open('http://qa.ah-prod.com:10080/amex/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
+                            });
+                        }
+                    },
+                    "Approve": {
+                        "attributes": {
+                            "disabled": "disabled"
+                        },
                         "click": function () {
                             clearTimer();
                             console.log("Timer Cleared");
@@ -332,23 +368,8 @@ function showHomePage() {
                             console.log("Timer Set");
 
                             var value = this.getValue();
-                            alert(JSON.stringify(value, null, "  "));
-
-                            node.name = value.name;
-                            node.heading = value.heading;
-                            node.title = value.title;
-                            node.prefix = value.prefix;
-                            node.flag = value.flag;
-                            node.body = value.body;
-                            node.banner = value.banner;
-                            node.forHealth = value.forHealth;
-                            node.forMoney = value.forMoney;
-                            node.forFamily = value.forFamily;
-
-
-                            node.update().then(function () {
-                                alert("Form Submitted")
-                            });
+                            sendEmail(); //object must be created on cloudCMS before email can be sent
+                            alert("Thank you for submitting an update. Please check your email for a verification link. Just click on the link to deploy your update!")
                         }
                     }
                 }
@@ -427,7 +448,8 @@ function showHomePage() {
         } 
     });
     
-
+    $('.alpaca-form-button-Preview').append('Preview');
+    $('.alpaca-form-button-Approve').append('Approve');
 }
 function showDrop() {
 
