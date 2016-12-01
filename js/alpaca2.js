@@ -126,7 +126,7 @@ $("#myDropdown").change(loadPage);
 function loadPage() {
 
     pageIdToLoad = $("#alpaca1").val() || "a42ecce24ae285aea068";
-
+    $("#topics").attr('disabled', true);
     reShowForm();
 
 }
@@ -175,6 +175,7 @@ function reShowForm() {
                         showHomePage();
                     } else {
                         $('#topics').html("");
+                        $("#topics").attr('disabled', true);
                         showDrop();
                     }
                 });
@@ -456,7 +457,7 @@ function showDrop() {
     //console.log(node.topics);
 
     $("#myform").css('visibility', 'visible');
-
+   
     var topicArray = new Array();
     $("#topics").append("<option value='none" + i + "'> None </option>");
     for (var i = 0; i < node.topics.length; i++) {
@@ -469,7 +470,7 @@ function showDrop() {
             }
       
     }
-
+    $("#topics").attr('disabled', false);
     showForm(i);
     
 }
@@ -1111,7 +1112,7 @@ function setCredentialsFromLogin() {
 
     checkCookie();
     //getPage(showAmexForm);
-
+    $("#topics").attr('disabled', true);
     getPage(showDrop);
 
 
