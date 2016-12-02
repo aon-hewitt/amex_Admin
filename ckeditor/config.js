@@ -35,7 +35,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     //config.contentsCss = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css';
     //config.contentsCss = 'ckeditor/bootstrap.css';
-    config.contentsCss = ['/amex_Admin/ckeditor/contents.css', '/amex_Admin/stylesheets/custom.css'];
+    //config.contentsCss = ['/amex_Admin/ckeditor/contents.css', '/amex_Admin/stylesheets/custom.css'];
     //config.contentsCss = '/secure.bscbenefitsconnect.com/css/custom.css';
     //config.stylesSet = [];
 
