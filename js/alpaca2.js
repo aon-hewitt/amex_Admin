@@ -706,7 +706,7 @@ function showForm(count) {
                                     "type": "ckeditor",
                                     "ckeditor": {
                                         "toolbar": [
-                                            ['Bold', 'Italic', 'Underline', 'Cut', 'Copy', 'Paste'], ['NumberedList', 'BulletedList'], ['Table', 'Source']
+                                            ['Bold', 'Italic', 'Underline', 'Cut', 'Copy', 'Paste'], ['NumberedList', 'BulletedList' ,'Link' , 'Unlink' ], ['Table', 'Source']
                                         ]
                                     }
                                 },
