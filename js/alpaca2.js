@@ -1218,6 +1218,12 @@ function submitForm() {
         processData: false,
         headers: {
             authorization: authorizationHeader
+        },
+        success: function(response){
+            //success process here
+       
+            $("#cpy").attr("disabled", false);
+
         }
     });
 }

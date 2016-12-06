@@ -154,6 +154,10 @@
             display: none;
         }
 
+        input#cpy.disabled {
+            cursor: not-allowed;
+            opacity: 0.65;
+        }
     </style>
  
     
@@ -252,7 +256,7 @@
                                 </div>
                                 <div>
                                     <input id="mySubmitButton" name="mySubmit" type="submit" value="Submit"> 
-                                    <input type="button" onclick="copyToClipboard('#p1')" value="Copy">
+                                    <input type="button" onclick="copyToClipboard('#p1')" value="Copy" id="cpy" disabled>
                                      
                                 </div>
                                 </form>
