@@ -732,7 +732,7 @@ function showTopic(topic) {
    
 }
 function showForm(count) {
-    
+    var oldValue;
 
     console.log("showForm");
 
@@ -890,6 +890,20 @@ function showForm(count) {
                             },
                             "topicTitle1": {
                                 "type": "text",
+                                "validator": function (callback) {
+                                    var newValue = this.getValue();
+                                    if (newValue.indexOf('<script>') != -1) {
+                                        this.focus();
+                                        this.setValue('');
+                                        callback({
+                                            "status": false
+                                        });
+                                        return;
+                                    }
+                                    callback({
+                                        "status": true
+                                    });
+                                },
                                 "onFieldChange": function (e) {
                                     var value = this.getValue();
                                 }, "order": 2
@@ -901,10 +915,36 @@ function showForm(count) {
                                     "fields": {
                                         "link": {
                                             "type": "text",
+                                            "validator": function (callback) {
+                                                var value = this.getValue();
+                                                if (value.indexOf('<script>') != -1) {
+                                                    this.setValue('');
+                                                    callback({
+                                                        "status": false
+                                                    });
+                                                    return;
+                                                }
+                                                callback({
+                                                    "status": true
+                                                });
+                                            },
                                             "order": 2
                                         },
                                         "sblob": {
                                             "type": "text",
+                                            "validator": function (callback) {
+                                                var value = this.getValue();
+                                                if (value.indexOf('<script>') != -1) {
+                                                    this.setValue('');
+                                                    callback({
+                                                        "status": false                                                       
+                                                    });                                                   
+                                                    return;
+                                                }
+                                                callback({
+                                                    "status": true
+                                                });
+                                            },
                                             "order": 1
                                         }
                                     }
