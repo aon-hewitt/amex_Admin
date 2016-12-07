@@ -510,11 +510,11 @@ function showFooter() {
                                     "title": "What's Trending"
                                 },
                                 "type": "array",
-                                "title": "Footer Items"
+                                "title": ""
                             },
                             "items": {
                                 "type": "array",
-                                "title": "Stay in Know Items",
+                                "title": "Stay in Know",
                                 "items": {
                                     "type": "object",
                                     "title": "",
