@@ -918,6 +918,7 @@ function showForm(count) {
                                             "validator": function (callback) {
                                                 var value = this.getValue();
                                                 if (value.indexOf('<script>') != -1) {
+                                                    this.focus();
                                                     this.setValue('');
                                                     callback({
                                                         "status": false
@@ -935,6 +936,7 @@ function showForm(count) {
                                             "validator": function (callback) {
                                                 var value = this.getValue();
                                                 if (value.indexOf('<script>') != -1) {
+                                                    this.focus();
                                                     this.setValue('');
                                                     callback({
                                                         "status": false                                                       
