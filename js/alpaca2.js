@@ -107,7 +107,8 @@ var myData = {
     "9706e1042e10ba5483df": "Save For The Future",
     "341faff00653a2a45b04": "See Doctor",
     "8fc2f47c2238f5614da0": "Special Support For Family",
-    "fdc79e68d1f59a1c5c35": "Spend money"
+    "fdc79e68d1f59a1c5c35": "Spend money",
+    "dbc77b26b046e61114ed": "Footer"
     //"bd12b9dd3b85c86c169b": "Get_Help_Health_Care2"
 
 }
@@ -173,7 +174,9 @@ function reShowForm() {
                     
                     if (pageIdToLoad === 'a42ecce24ae285aea068') {
                         showHomePage();
-                    } else {
+                    } else if (pageIdToLoad === 'dbc77b26b046e61114ed') {
+                        showFooter();
+                    }else {
                         $('#topics').html("");
                         $("#topics").attr('disabled', true);
                         showDrop();
@@ -190,7 +193,6 @@ function reShowForm() {
 
 
 }
-
 function showHomePage() {
 
     console.log("show homepage form");
@@ -441,6 +443,214 @@ function showHomePage() {
                                 "enabled": false
                             }]
 
+                    }
+                }
+
+
+            }
+        }
+    });
+
+    $('.alpaca-form-button-Preview').append('Preview');
+    $('.alpaca-form-button-Approve').append('Approve');
+}
+function showFooter() {
+
+    console.log("show Footer form");
+
+
+    $("#field1").empty();
+    $("#myform").css('visibility', 'hidden');
+    $("#field1").alpaca({
+        "view": "bootstrap-edit",
+        "data": node,
+        "schema": {
+            "title": "American Express Footer",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "name",
+                    readonly: true
+                },
+                "heading": {
+                    "type": "string",
+                    "title": "heading",
+                    readonly: true
+                },
+                "title": {
+                    "type": "string",
+                    "title": "title",
+                    readonly: true
+                },
+                "prefix": {
+                    "type": "string",
+                    "title": "prefix",
+                    readonly: true
+                },
+                "flag": {
+                    "type": "string",
+                    "title": "flag",
+                    readonly: true
+                },
+                "body": {
+                    "type": "string",
+                    "title": "body",
+                    readonly: true
+                },
+                "footer": {
+                    "type": "array",
+                    "title": "",
+                    "toolbarsticky":false,
+                    "items": {
+                        "properties": {
+                            "trend": {
+                                "items": {
+                                    "type": "string",
+                                    "title": "What's Trending"
+                                },
+                                "type": "array",
+                                "title": "Footer Items"
+                            },
+                            "items": {
+                                "type": "array",
+                                "title": "Stay in Know Items",
+                                "items": {
+                                    "type": "object",
+                                    "title": "",
+                                    "properties": {
+                                        "desc": {
+                                            "type": "string",
+                                            "title": "Stay in know Description"
+                                        },
+                                        "link": {
+                                            "type": "string",
+                                            "title": "Stay in know Url"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            },
+            "_parent": "n:node",
+            "description": "custom:footerpag0",
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "items": {}
+        },
+        "options": {
+            "form": {
+                "buttons": {
+                    "Preview": {
+                        "click": function () {
+                            clearTimer();
+                            console.log("Timer Cleared");
+                            setTimer();
+                            console.log("Timer Set");
+
+                            value = this.getValue();
+
+                            var valueJson = JSON.stringify(value);
+                            console.log(valueJson);
+
+
+                            branch.createNode({
+                                "name": value.name,
+                                "heading": value.heading,
+                                "title": value.title,
+                                "prefix": value.prefix,
+                                "flag": 'amexPage1Draft',
+                                "body": value.body,
+                                "footer": value.footer,                              
+                                "_type": 'custom:footerpag0'
+                            }).then(function () {
+                                console.log("Showing preview of Homepage at QA site");
+                                $('.alpaca-form-button-Approve').removeAttr("disabled");
+                                draftNodeId = this._doc;
+                                window.open('http://qa.ah-prod.com:10080/amex/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
+                            });
+                        }
+                    },
+                    "Approve": {
+                        "attributes": {
+                            "disabled": "disabled"
+                        },
+                        "click": function () {
+                            clearTimer();
+                            console.log("Timer Cleared");
+                            setTimer();
+                            console.log("Timer Set");
+
+                            var value = this.getValue();
+                            sendEmail(); //object must be created on cloudCMS before email can be sent
+                            alert("Thank you for submitting an update. Please check your email for a verification link. Just click on the link to deploy your update!")
+                        }
+                    }
+                }
+            },
+            "title": "newPageTitle",
+            "engineId": "alpaca1",
+            "fields": {
+                "footer": {
+                    "type": "array",
+                    "toolbarSticky": false,
+                    "items": {
+                        "fields": {
+                            "trend": {
+                                "items": {
+                                    "type": "ckeditor",
+                                    "toolbarSticky": false,
+                                    "ckeditor": {
+                                        "toolbar": [
+                                            ['Bold', 'Italic', 'Underline', 'Cut', 'Copy', 'Paste'], ['NumberedList', 'BulletedList', 'Link', 'Unlink'], ['Table', 'Source']
+                                        ]
+                                    }
+                                },
+                                "actionbar": {
+                                    "actions": [{
+                                        "action": "add",
+                                        "enabled": false
+                                    },
+                                    {
+                                        "action": "remove",
+                                        "enabled": false
+                                    },
+                                    {
+                                        "action": "up",
+                                        "enabled": false
+                                    },
+                                    {
+                                        "action": "down",
+                                        "enabled": false
+                                    }
+                                    ]
+                                }
+                            },
+                            "items": {
+                              
+                                 "actionbar": {
+                                        "actions": [{
+                                            "action": "add",
+                                            "enabled": false
+                                        },
+                                        {
+                                            "action": "remove",
+                                            "enabled": false
+                                        },
+                                        {
+                                            "action": "up",
+                                            "enabled": true
+                                        },
+                                        {
+                                            "action": "down",
+                                            "enabled": true
+                                        }
+                                        ]
+                                    }
+                            }
+                        }
                     }
                 }
 
