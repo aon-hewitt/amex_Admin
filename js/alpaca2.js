@@ -382,6 +382,67 @@ function showHomePage() {
             "fields": {
                 "banner": {
                     "type": "array",
+                    "items": {
+                        "fields": {
+                            "imageBanner": {
+                                "type": "text"
+                            },
+                            "imageP": {
+                                "type": "text",
+                                "validator": function (callback) {
+                                    var newValue = this.getValue();
+                                    if (newValue.indexOf('<script>') != -1) {
+                                        this.focus();
+                                        this.setValue('');
+                                        callback({
+                                            "status": false
+                                        });
+                                        return;
+                                    }
+                                    callback({
+                                        "status": true
+                                    });
+                                },
+                            },
+                            "imageH": {
+                                "type": "text",
+                                "validator": function (callback) {
+                                    var newValue = this.getValue();
+                                    if (newValue.indexOf('<script>') != -1) {
+                                        this.focus();
+                                        this.setValue('');
+                                        callback({
+                                            "status": false
+                                        });
+                                        return;
+                                    }
+                                    callback({
+                                        "status": true
+                                    });
+                                },
+                            },
+                            "imageP2": {
+                                "type": "text",
+                                "validator": function (callback) {
+                                    var newValue = this.getValue();
+                                    if (newValue.indexOf('<script>') != -1) {
+                                        this.focus();
+                                        this.setValue('');
+                                        callback({
+                                            "status": false
+                                        });
+                                        return;
+                                    }
+                                    callback({
+                                        "status": true
+                                    });
+                                }
+                            },
+                            "imageLink": {
+                                "type": "text"
+                            }
+                        }
+                    },
                     "toolbarSticky": true,
                     "actionbar": {
                         "actions": [
@@ -399,6 +460,44 @@ function showHomePage() {
                 },
                 "forHealth": {
                     "type": "array",
+                    "items": {
+                        "fields": {
+                            "link": {
+                                "type": "text",
+                                "validator": function (callback) {
+                                    var newValue = this.getValue();
+                                    if (newValue.indexOf('<script>') != -1) {
+                                        this.focus();
+                                        this.setValue('');
+                                        callback({
+                                            "status": false
+                                        });
+                                        return;
+                                    }
+                                    callback({
+                                        "status": true
+                                    });
+                                },
+                            },
+                            "description": {
+                                "type": "text",
+                                "validator": function (callback) {
+                                    var newValue = this.getValue();
+                                    if (newValue.indexOf('<script>') != -1) {
+                                        this.focus();
+                                        this.setValue('');
+                                        callback({
+                                            "status": false
+                                        });
+                                        return;
+                                    }
+                                    callback({
+                                        "status": true
+                                    });
+                                }
+                            }
+                        }
+                    },
                     "toolbarSticky": true,
                     "actionbar": {
                         "actions": [
@@ -415,6 +514,44 @@ function showHomePage() {
                 },
                 "forMoney": {
                     "type": "array",
+                    "items": {
+                        "fields": {
+                            "link": {
+                                "type": "text",
+                                "validator": function (callback) {
+                                    var newValue = this.getValue();
+                                    if (newValue.indexOf('<script>') != -1) {
+                                        this.focus();
+                                        this.setValue('');
+                                        callback({
+                                            "status": false
+                                        });
+                                        return;
+                                    }
+                                    callback({
+                                        "status": true
+                                    });
+                                },
+                            },
+                            "description": {
+                                "type": "text",
+                                "validator": function (callback) {
+                                    var newValue = this.getValue();
+                                    if (newValue.indexOf('<script>') != -1) {
+                                        this.focus();
+                                        this.setValue('');
+                                        callback({
+                                            "status": false
+                                        });
+                                        return;
+                                    }
+                                    callback({
+                                        "status": true
+                                    });
+                                }
+                            }
+                        }
+                    },
                     "toolbarSticky": true,
                     "actionbar": {
                         "actions": [
@@ -431,6 +568,44 @@ function showHomePage() {
                 },
                 "forFamily": {
                     "type": "array",
+                    "items": {
+                        "fields": {
+                            "link": {
+                                "type": "text",
+                                "validator": function (callback) {
+                                    var newValue = this.getValue();
+                                    if (newValue.indexOf('<script>') != -1) {
+                                        this.focus();
+                                        this.setValue('');
+                                        callback({
+                                            "status": false
+                                        });
+                                        return;
+                                    }
+                                    callback({
+                                        "status": true
+                                    });
+                                },
+                            },
+                            "description": {
+                                "type": "text",
+                                "validator": function (callback) {
+                                    var newValue = this.getValue();
+                                    if (newValue.indexOf('<script>') != -1) {
+                                        this.focus();
+                                        this.setValue('');
+                                        callback({
+                                            "status": false
+                                        });
+                                        return;
+                                    }
+                                    callback({
+                                        "status": true
+                                    });
+                                }
+                            }
+                        }
+                    },
                     "toolbarSticky": true,
                     "actionbar": {
                         "actions": [
@@ -732,7 +907,6 @@ function showTopic(topic) {
    
 }
 function showForm(count) {
-    var oldValue;
 
     console.log("showForm");
 
