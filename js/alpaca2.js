@@ -108,7 +108,7 @@ var myData = {
     "341faff00653a2a45b04": "See Doctor",
     "8fc2f47c2238f5614da0": "Special Support For Family",
     "fdc79e68d1f59a1c5c35": "Spend money",
-    "dbc77b26b046e61114ed": "Footer"
+    "dbc77b26b046e61114ed": "Global Content"
     //"bd12b9dd3b85c86c169b": "Get_Help_Health_Care2"
 
 }
@@ -640,7 +640,7 @@ function showFooter() {
         "view": "bootstrap-edit",
         "data": node,
         "schema": {
-            "title": "American Express Footer",
+            "title": "American Express Global Content",
             "type": "object",
             "properties": {
                 "name": {
