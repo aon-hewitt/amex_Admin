@@ -72,6 +72,7 @@
                                             node.update().then(function () {
                                                 console.log("node updated");
                                                 $("#message").css("display", "block");
+                                                $("#loadingMessage").css("display", "none");
                                             });
 
                                         } else {
@@ -86,6 +87,7 @@
                                             node.update().then(function () {
                                                 console.log("node updated");
                                                 $("#message").css("display", "block");
+                                                $("#loadingMessage").css("display", "none");
                                             });
 
                                         }
@@ -143,7 +145,8 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div id="message" style="display:none; margin:40px"><strong>Thank you</strong> for confirming your update to the site. Please close all browser windows and reload the site to view your updated content.</div>
+                    <div id="loadingMessage" style="margin:40px; font-size:20px">Publishing, please wait...</div>
+                    <div id="message" style="display:none; margin:40px; font-size:20px"><strong>Thank you</strong> for confirming your update to the site. Please close all browser windows and reload the site to view your updated content.</div>
 
                 </div>
             </div>
