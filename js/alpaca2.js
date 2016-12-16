@@ -1032,9 +1032,10 @@ function showForm(count) {
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
                                 //window.open('http://qa.ah-prod.com:10080/amex/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
-                                window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+                                //window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+                                window.open('http://vogens.com/aon/amexsite/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
 
-
+                                
                             });
                         }
                     },
