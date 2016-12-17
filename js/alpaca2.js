@@ -374,7 +374,7 @@ function showHomePage() {
 
                             var value = this.getValue();
                             sendEmail(); //object must be created on cloudCMS before email can be sent
-                            alert("Thank you for submitting an update. Please check your email for a verification link. Just click on the link to deploy your update!")
+                            alert("Thank you for submitting an update for verification. An email has been sent to you containing a verification link. Just click on the link to deploy your update.")
                         }
                     }
                 }
