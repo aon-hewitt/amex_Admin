@@ -32,14 +32,12 @@ var draftNodeId;
 
 function getPage(callback) {
 
-
                 var config = {
                 "username": username,
                 "password": password,
                 "baseURL": "/proxy"
                         }
 
-    
     //var config = {
     //    "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
     //    "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
@@ -110,7 +108,7 @@ var myData = {
     "341faff00653a2a45b04": "See Doctor",
     "8fc2f47c2238f5614da0": "Special Support For Family",
     "fdc79e68d1f59a1c5c35": "Spend money",
-    "dbc77b26b046e61114ed": "Footer"
+    "dbc77b26b046e61114ed": "Global Content"
     //"bd12b9dd3b85c86c169b": "Get_Help_Health_Care2"
 
 }
@@ -358,7 +356,9 @@ function showHomePage() {
                                 console.log("Showing preview of Homepage at QA site");
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
+                                //window.open('http://qa.ah-prod.com:10080/amex/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
                                 window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+
                             });
                         }
                     },
@@ -374,7 +374,7 @@ function showHomePage() {
 
                             var value = this.getValue();
                             sendEmail(); //object must be created on cloudCMS before email can be sent
-                            alert("Thank you for submitting an update. Please check your email for a verification link. Just click on the link to deploy your update!")
+                            alert("Thank you for submitting an update for verification. An email has been sent to you containing a verification link. Just click on the link to deploy your update.")
                         }
                     }
                 }
@@ -642,7 +642,7 @@ function showFooter() {
         "view": "bootstrap-edit",
         "data": node,
         "schema": {
-            "title": "American Express Footer",
+            "title": "American Express Global Content",
             "type": "object",
             "properties": {
                 "name": {
@@ -1031,7 +1031,11 @@ function showForm(count) {
                                 console.log("Showing preview at QA site");
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
+                                //window.open('http://qa.ah-prod.com:10080/amex/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
                                 window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+                                //window.open('http://vogens.com/aon/amexsite/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+
+                                
                             });
                         }
                     },
@@ -1211,8 +1215,6 @@ function sendEmail() {
     console.log("sending email with draft node Id of " + draftNodeId);
 
     node.subchain(platform).then(function () {
-        
-        // NOTE: this = platform
 
         var workflowConfig = {};
         workflowConfig.context = {};
@@ -1225,29 +1227,17 @@ function sendEmail() {
         workflowConfig.runtime = {};
         workflowConfig.runtime.applicationId = applicationId;
         workflowConfig.runtime.emailProviderId = emailProviderId;
-        
-        // auth info
-        var authInfo = platform.getDriver().authInfo;
-        
-        // find the current user
-        this.readDomain(authInfo.principalDomainId).readPrincipal(authInfo.principalId).then(function() {
-            var currentUser = this;
-        
-            // create workflow and include the current user's email
-            this.subchain(platform).createWorkflow(workflowId, workflowConfig).then(function () {
-                this.addResource(node);
-                var data = {
-                    "coreNodeId": node._doc,
-                    "draftNodeId": draftNodeId,
-                    "email": currentUser.email
-                }
-                this.start(data).then(function () {
+        platform.createWorkflow(workflowId, workflowConfig).then(function () {
+            this.addResource(node);
+            var data = {
+                "coreNodeId": node._doc,
+                "draftNodeId": draftNodeId,
+                "email": platform.getDriver().authInfo.principalId
+            }
+            this.start(data).then(function () {
 
-                });
             });
-            
         });
-                
     });
 }
 
@@ -1663,8 +1653,10 @@ function submitForm() {
         },
         success: function(response){
             //success process here
-       
-            $("#cpy").attr("disabled", false);
+      
+            var txt = $("#uploadFilenameEdit5").val();
+            $("#lnk").html('https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=' + txt);
+            $("#cpy_element").css('display', 'block');
 
         }
     });
@@ -1675,10 +1667,17 @@ function submitForm() {
 
 function copyToClipboard(element) {
     if ($("#uploadFilenameEdit5").val() !== "") {
+
         var $temp = $("<input>");
+        var txt = 'https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=' + $("#uploadFilenameEdit5").val();
+
         $("body").append($temp);
-        $temp.val($(element).text()).select();
+
+        //$temp.val($(element).text()).select();
+        $temp.val(txt).select();
+        
         document.execCommand("copy");
+
         $temp.remove();
     }
 }
