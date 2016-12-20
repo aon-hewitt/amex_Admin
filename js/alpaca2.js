@@ -746,7 +746,8 @@ function showFooter() {
                                 console.log("Showing preview of Homepage at QA site");
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
-                                window.open('http://qa.ah-prod.com:10080/amex/' + value.name + '.html' + '?draft=' + this._doc, '_blank');
+                                //window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+                                window.open('http://qc.ah-prod.com/amex/' + index + '.html' + '?draftFooter=' + this._doc, 'previewWindow');
                             });
                         }
                     },
