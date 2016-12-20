@@ -747,7 +747,7 @@ function showFooter() {
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
                                 //window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
-                                window.open('http://qc.ah-prod.com/amex/' + index + '.html' + '?draftFooter=' + this._doc, 'previewWindow');
+                                window.open('http://qc.ah-prod.com/amex/' + 'index' + '.html' + '?draftFooter=' + this._doc, 'previewWindow');
                             });
                         }
                     },
