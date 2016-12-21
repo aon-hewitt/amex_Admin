@@ -76,6 +76,21 @@
                                                 $("#draftNodeId").html(draftNodeId);
                                             });
 
+                                        } else if (coreNodeId == "dbc77b26b046e61114ed") { // footer
+                                            console.log("Changing data on node " + node._doc + "with data from " + swapNode._doc);
+                                            node.name = swapNode.name;
+                                            node.heading = swapNode.heading;
+                                            node.title = swapNode.title;
+                                            node.prefix = swapNode.prefix;
+                                            //node.flag = swapNode.flag; //the draft flag should not be swapped in
+                                            node.footer = swapNode.footer;
+                                            node.update().then(function () {
+                                                console.log("node updated");
+                                                $("#message").css("display", "block");
+                                                $("#loadingMessage").css("display", "none");
+                                                $("#draftNodeId").html(draftNodeId);
+                                            });
+                                        
                                         } else {
                                             console.log("Changing data on node " + node._doc + "with data from " + swapNode._doc);
                                             node.name = swapNode.name;

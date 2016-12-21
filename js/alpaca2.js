@@ -355,7 +355,7 @@ function showHomePage() {
                                 "forFamily": value.forFamily,
                                 "_type": 'custom:homepageame0'
                             }).then(function () {
-                                console.log("Showing preview of Homepage at QA site");
+                                console.log("Showing preview of Homepage at QC site");
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
                                 window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
@@ -743,7 +743,7 @@ function showFooter() {
                                 "footer": value.footer,                              
                                 "_type": 'custom:footerpag0'
                             }).then(function () {
-                                console.log("Showing preview of Homepage at QA site");
+                                console.log("Showing preview of Footer at QC site");
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
                                 //window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
@@ -1029,7 +1029,7 @@ function showForm(count) {
                                 "topics": value.topics,
                                 "_type": 'custom:testame0'
                             }).then(function () {
-                                console.log("Showing preview at QA site");
+                                console.log("Showing preview of standard page at QC site");
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
                                 window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
