@@ -1585,24 +1585,13 @@ fl.onchange = function (e) {
     switch (ext) {
         case 'pdf':
             console.log('pdf file type allowed');
-            break;
-        case 'xls':
-            console.log('xls file type allowed');
-            break;
-        case 'xlsx':
-            console.log('xlsx file type allowed');
-            break;
-        case 'docx':
-            console.log('docx file type allowed');
-            break;
-     
+            break; 
         case 'png':
             console.log('png file type allowed');
             break;
         case 'PNG':
             console.log('png file type allowed');
-            break;
-
+            break; 
         case 'JPG':
             console.log('jpg file type allowed');
             break;
@@ -1611,15 +1600,14 @@ fl.onchange = function (e) {
             break;
         case 'jpeg':
             console.log('jpeg file type allowed');
-            break;
-
+            break; 
         case 'JPEG':
             console.log('jpeg file type allowed');
             break;
 
 
         default:
-            alert('Pdf , doc or xls/xlsx , png ,jpg files may be uploaded');
+            alert('Pdf , png ,jpg files may be uploaded');
             this.value = '';
     }
 };
