@@ -64,8 +64,8 @@ function getPage(callback) {
     }).then(function () {
         platform = this;
 
-       // document.cookie = "username=" + username;
-        //document.cookie = "password=" + password;
+        document.cookie = "username=" + username;
+        document.cookie = "password=" + password;
 
         this.readRepository(repositoryId).then(function () {
             repository = this;
