@@ -64,8 +64,8 @@ function getPage(callback) {
     }).then(function () {
         platform = this;
 
-        document.cookie = "username=" + username;
-        document.cookie = "password=" + password;
+       // document.cookie = "username=" + username;
+        //document.cookie = "password=" + password;
 
         this.readRepository(repositoryId).then(function () {
             repository = this;
@@ -1515,7 +1515,7 @@ function checkCookie() {
         //   $("#loginContainer").append('<div id="dialog" title="Please Log In."><label>Username:</label><input id="txtUsername" name="txtUsername" type="text"><label>Password:</label><input id="txtPassword" name="txtPassword" type="password"><br/><input id="submitButton" onclick="setCredentialsFromLogin()" name="Submit" type="button" value="Submit"><label id="lblLoginLable"></label></div>');
 
         /*$("#dialog").dialog({
-            modal: true,
+            modal: true,+
             draggable: false,
             width: "auto",
             position: {
@@ -1549,15 +1549,18 @@ function setCredentialsFromLogin() {
 
     username = $("#txtUsername").val();
     password = $("#txtPassword").val();
-    $("#dialog").css('display', 'none');
-    $("#home").css('visibility', 'visible');
-    $("#edit_nav").css('visibility', 'visible');
+    if (username == '' || password == '') {
+        alert('Please enter valid username/password');
+    } else {
+        $("#dialog").css('display', 'none');
+        $("#home").css('visibility', 'visible');
+        $("#edit_nav").css('visibility', 'visible');
 
-    checkCookie();
-    //getPage(showAmexForm);
-    $("#topics").attr('disabled', true);
-    getPage(showDrop);
-
+        checkCookie();
+        //getPage(showAmexForm);
+        $("#topics").attr('disabled', true);
+        getPage(showDrop);
+    }
 
 }
 
