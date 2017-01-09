@@ -1254,239 +1254,6 @@ function sendEmail() {
 
 
 
-//original default edit & submit
-function showAmexForm() {
-
-    console.log("show amex form");
-
-
-    $("#myform").alpaca({
-        "view": "bootstrap-edit",
-        "data": node,
-        "schema": {
-            "title": "American Express",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "title": "Page Name",
-                    readonly: true
-                },
-                "heading": {
-                    "type": "string",
-                    "title": "Heading",
-                    readonly: true
-                },
-                "title": {
-                    "type": "string",
-                    "title": "Page Title",
-                    readonly: true
-                },
-                "prefix": {
-                    "type": "string",
-                    "title": "prefix",
-                    readonly: true
-                },
-                "flag": {
-                    "type": "string",
-                    "title": "flag",
-                    readonly: true
-                },
-                "body": {
-                    "type": "string",
-                    "title": "body",
-                    readonly: true
-                },
-                "topics": {
-                    "type": "array",
-                    "title": "Topics",
-                    "items": {
-                        "properties": {
-                            "topicHeader": {
-                                "type": "string",
-                                "title": "Topic Header",
-                                readonly: true
-                            },
-                            "topicTitle1": {
-                                "type": "string",
-                                "title": "TopicTitle"
-                            },
-                            "items": {
-                                "type": "array",
-                                "title": "Callout Items",
-                                "items": {
-                                    "type": "object",
-                                    "title": "Item",
-                                    "properties": {
-                                        "link": {
-                                            "type": "string",
-                                            "title": "Link Url"
-                                        },
-                                        "sblob": {
-                                            "type": "string",
-                                            "title": "Description"
-                                        }
-                                    }
-                                }
-                            },
-                            "rich_blobs": {
-                                "items": {
-                                    "type": "string",
-                                    "title": "Items"
-                                },
-                                "type": "array",
-                                "title": "Editable Callouts"
-                            }
-                        },
-                        "type": "object"
-                    }
-                }
-            },
-            "_parent": "n:node",
-            "description": "custom:testame0",
-            "$schema": "http://json-schema.org/draft-04/schema#",
-            "items": {}
-        },
-        "options": {
-            "form": {
-                "buttons": {
-                    "submit": {
-                        "click": function () {
-                            clearTimer();
-                            console.log("Timer Cleared");
-                            setTimer();
-                            console.log("Timer Set");
-
-                            var value = this.getValue();
-                            alert(JSON.stringify(value, null, "  "));
-
-
-                            //preview design feather light 
-                            //  $('#featherlight_data').modal('show');
-                            for (var i = 0; i < value.topics.length; i++) {
-                                $('#tbl_preview').append("<tr id='tbl_preview_tr" + i + "'><td>" + value.topics[i].topicHeader + "</td><td>" + value.topics[i].topicTitle1 + "</td>");
-                                for (var j = 0; j < value.topics[i].items.length ; j++) {
-
-                                    $('#tbl_preview_tr' + i).append("<tr id='tbl_preview_tr_inner" + j + "'><td>" + value.topics[i].items[j].sblob + "</td><td>" + value.topics[i].items[j].link + "</td> </tr>");
-                                    //$('#tbl_preview_tr' + i).append("<td>" + value.topics[i].items[j].link + "</td><td></td>");
-                                }
-                                $('#tbl_preview_tr' + i).append("<td id='tbl_preview_tr_editable" + i + "'></td>");
-
-                                for (var k = 0; k < value.topics[i].rich_blobs.length ; k++) {
-                                    //  console.log(k + "===" + value.topics[i].rich_blobs[k]);
-                                    $('#tbl_preview_tr_editable' + i).append("<tr id='tbl_preview_tr_editable_inner" + k + "'><td>" + value.topics[i].rich_blobs[k] + "</td></tr>");
-
-
-                                    // $('#tbl_preview_tr' + i).append("<tr id='tbl_preview_tr_editable" + j + "'><td>"  + value.topics[i].rich_blobs[k] + "</td></tr>");
-                                }
-                            }
-
-                            node.name = value.name;
-                            node.heading = value.heading;
-                            node.title = value.title;
-                            node.prefix = value.prefix;
-                            node.flag = value.flag;
-                            node.body = value.body;
-                            node.topics = value.topics;
-
-                            node.update().then(function () {
-                                alert("Form Submitted")
-                            });
-                        }
-                    }
-                }
-            },
-            "title": "newPageTitle",
-            "engineId": "alpaca1",
-            "fields": {
-                "name": {
-                    "type": "text"
-                },
-                "heading": {
-                    "type": "text"
-                },
-                "title": {
-                    "type": "text"
-                },
-                "prefix": {
-                    "type": "text"
-                },
-                "flag": {
-                    "type": "text"
-                },
-                "body": {
-                    "type": "text"
-                },
-                "topics": {
-                    "type": "array",
-                    "toolbarSticky": false,
-                    "items": {
-                        "fields": {
-                            "topicTitle1": {
-                                "type": "text"
-                            },
-                            "items": {
-                                "actionbar": {
-                                    "actions": [{
-                                        "action": "add",
-                                        "enabled": false
-                                    }]
-                                }
-                            },
-                            "rich_blobs": {
-                                "items": {
-                                    "type": "ckeditor",
-                                    "ckeditor": {
-                                        "toolbar": [
-                                            ['Bold', 'Italic', 'Underline', 'Cut', 'Copy', 'Paste'], ['NumberedList', 'BulletedList'], ['Table', 'Source']
-                                        ]
-                                    }
-                                },
-                                "actionbar": {
-                                    "actions": [{
-                                        "action": "add",
-                                        "enabled": false
-                                    }]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "postRender": function (control) {
-
-            //style topics 
-            var n = control.childrenByPropertyId["topics"].children;
-
-            for (var i = 0; i < n.length ; i++) {
-                n[i].children[0].getFieldEl().addClass('orangeBackground');
-                n[i].children[1].getFieldEl().addClass('orangeBackground');
-                n[i].children[3].getFieldEl().addClass('orangeBackground1');
-                n[i].children[2].getFieldEl().addClass('orangeBackground1');
-
-
-
-                console.log(n[i].children[3].childrenByPropertyId['rich_blobs']);
-                console.log(n[i]);
-
-                for (var j = 0; j < n[i].children[3].length; j++) {
-                    n[i].children[3].children[j].getFieldEl().css("background-color", "lightgreen");
-                }
-
-
-            }
-
-            //control.childrenByPropertyId["topics"].getFieldEl().addClass('orangeBackground');
-        }
-    });
-
-
-
-}
-
-
-
 function checkCookie() {
 
     if (performance.navigation.type == 1) {
@@ -1642,37 +1409,38 @@ function submitForm() {
 
     console.log(platform);
     var authorizationHeader = platform.getDriver().getHttpHeaders()["Authorization"];
-    var form = $("#frmeditSubmitForm5");
+    var form = $("#frmeditSubmitForm5");    
+        $.ajax({
+            type: "POST",
+            url: "https://api.cloudcms.com/repositories/" + repositoryId + "/branches/" + branchId + "/nodes/" + ContainerId + "/attachments/" + ($("#uploadFilenameEdit5").val()).replace(" ", "_") + "/",
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                authorization: authorizationHeader
+            },
+            success: function (response) {
+                //success process here
+                var txt = $("#uploadFilenameEdit5").val();
+                $("#lnk").html(' https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=' + txt);
 
-    $.ajax({
-        type: "POST",
-        url: "https://api.cloudcms.com/repositories/" + repositoryId + "/branches/" + branchId + "/nodes/" + ContainerId + "/attachments/" + ($("#uploadFilenameEdit5").val()).replace(" ", "_") + "/",
-        data: formData,
-        contentType: false,
-        processData: false,
-        headers: {
-            authorization: authorizationHeader
-        },
-        success: function(response){
-            //success process here
-            var txt = $("#uploadFilenameEdit5").val();
-            $("#lnk").html(' https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=' + txt);
+                $("#cpy_element").css('display', 'block');
+                $("#cpy").attr("disabled", false);
 
-            $("#cpy_element").css('display','block');       
-            $("#cpy").attr("disabled", false);
-
-        }
-    });
+            }
+        });
+    
 }
 
 //This ends form upload scripting-----------------------------------------------
 
 
 function copyToClipboard(element) {
-    if ($("#uploadFilenameEdit5").val() !== "") {
+    var lnk= $("#uploadFilenameEdit5").val();
+    if (lnk) {
         var $temp = $("<input>");
         $("body").append($temp);
-        $temp.val($(element).text()).select();
+        $temp.val($(element).text() + lnk).select();
         document.execCommand("copy");
         $temp.remove();
     }
