@@ -1384,7 +1384,9 @@ fl.onchange = function (e) {
 
 
 $("#uploadFilenameEdit5").on('change keyup paste mouseup', function () {
-    $("#myFileName").html($("#uploadFilenameEdit5").val());
+    $("#myFileName1").html($("#uploadFilenameEdit5").val());
+    var tx =  "https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=";
+    $("#lnk1").html(tx+ $("#uploadFilenameEdit5").val());
 });
 
 
@@ -1421,12 +1423,13 @@ function submitForm() {
             },
             success: function (response) {
                 //success process here
+               /*
                 var txt = $("#uploadFilenameEdit5").val();
                 $("#lnk").html(' https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=' + txt);
 
                 $("#cpy_element").css('display', 'block');
                 $("#cpy").attr("disabled", false);
-
+                */
             }
         });
     

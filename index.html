@@ -167,7 +167,7 @@
         #cpy_element {
             display:none;
         }
-        textarea#lnk {
+        textarea#lnk ,     textarea#lnk1{
             width: 30em;
             height: 7em;
         }
@@ -254,17 +254,13 @@
                                         <!--https://api.cloudcms.com/repositories/e083f23fc5141afe5d22/branches/fcf1c3fb882fd40ecf97/nodes/f2585ff41013540945ab/attachments/
                                         <span id="myFileName"></span>/-->
 
-                                     
-                                    
-
-
                                         <!-- <nobr>https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=<span id="myFileName"></span> </nobr>-->
                                         <br>
                                     </label>
-                                       <p id="p1" style="display:none">
-                                          
+                                       <p id="p1" style="display:none">                                          
                                             https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=<span id="myFileName1"></span>                                          
                                         </p>
+                                   
                                 </div>
                                 <div>
                                     <input id="mySubmitButton" name="mySubmit" type="submit" value="Submit"> 
@@ -276,6 +272,11 @@
                                         <input type="button" onclick="copyToClipboard('#p1')" value="Copy Link" id="cpy">
                                      </div>
                                 </div>
+                                    <div><br/>
+                                         <p><strong> To create a link to the file in the page editor click on copy and paste this customized link
+                                        into the link field:</strong></p>
+                                      <textarea id="lnk1" readonly></textarea><br/>
+                                    </div>
                                 </form>
                                 <script>
                                     $("#frmeditSubmitForm5").submit(function (event) {
