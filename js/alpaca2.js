@@ -1206,7 +1206,6 @@ function showForm(count) {
 
     myVar = setTimeout(function () {
         $("#myform").css('visibility', 'visible');
-    }, 4000);
  
     //$("#field1").css("visibility", "hidden");
     $('.alpaca-form-button-Preview').append('Preview');
