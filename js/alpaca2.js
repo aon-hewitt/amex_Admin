@@ -1394,7 +1394,7 @@ var ContainerId = 'fd1f6aafd2b6e54d0c71';
 
 function submitForm() {
     var formData = new FormData($("#frmeditSubmitForm5")[0]);
-    alert("Please wait resource being uploaded.");
+    alert("Please wait while your resource being uploaded.");
     Gitana.connect({
         "clientKey": "106d6b42-46e7-4f54-9a52-7ceed8e682b4",
         "clientSecret": "It+QMtokAs7f8k5LB3hzgnNGnrR6n99/q3PpxkszdFNIVoU+BD6C7Y68s6S6fNiY2xgkSbBQlCpDJp98AWWPCap2MaNR+F6nk1H44gFAKCA=",
