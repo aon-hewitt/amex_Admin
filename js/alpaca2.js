@@ -23,9 +23,7 @@ var applicationId = 'c8a4dc1dd5644f2934be'; // to be provided for amex app
 var emailProviderId = '2c4497662def5cde8e96';//from amex app
 var workflowId = 'amexWorkflow';
 var projectId = '06fea8ff21b87b9e8358';
-var draftNodeId;
-
-
+var draftNodeId; 
 
 
 //Switching from local developement to production will require switching config objects
@@ -42,55 +40,60 @@ function getPage(callback) {
                 
     }
     */
-    var config = {
-        "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
-        "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
-        "username": username,
-        "password": password,
-        "baseURL": "https://api.cloudcms.com",
-       "application": "c8a4dc1dd5644f2934be"
-   }
 
-    Gitana.connect(config, function (err) {
-   
-        if (err) {
-            console.log("Error: " + err + window.location.href);
-            //$("#loading-image").css('display', 'none');
 
-            $("#lblLoginLable").html("Username or password are incorrect. Please try again.");
-            $("#dialog").css('display', 'block');
-          //  $("#dialog").dialog("open");
-
-            return;
-
+    if (!($("#txtUsername").val()) || (!($("#txtPassword").val()))) {
+        $("#lblLoginLable").html("Username or password are incorrect. Please try again.");
+        return;
+    }
+    else {
+         
+        var config = {
+            "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
+            "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
+            "username": username,
+            "password": password,
+            "baseURL": "https://api.cloudcms.com",
+            "application": "c8a4dc1dd5644f2934be"
         }
-    }).then(function () {
-        platform = this;
+         
+        Gitana.connect(config, function (err) {
 
-       // document.cookie = "username=" + username;
-        //document.cookie = "password=" + password;
-       
-        this.readRepository(repositoryId).then(function () {
-            repository = this;
+            if (err) {
+                console.log("Error: " + err + window.location.href);
+                $("#lblLoginLable").html("Username or password are incorrect. Please try again.");
+                $("#dialog").css('display', 'block');
+
+                return;
+
+            } else {
+
+                $("#dialog").css('display', 'none');
+                $("#home").css('visibility', 'visible');
+                $("#edit_nav").css('visibility', 'visible');
+
+                checkCookie();
+                //getPage(showAmexForm);
+                $("#topics").attr('disabled', true);
+
+            }
+        }).then(function () {
+            platform = this;
+
+            // document.cookie = "username=" + username;
+            //document.cookie = "password=" + password;
+
+            this.readRepository(repositoryId).then(function () {
+                repository = this;
 
 
-            this.readBranch(branchId).then(function () {
-                branch = this;
+                this.readBranch(branchId).then(function () {
+                    branch = this;
+                });
             });
-        });
-
- 
-     
-           $("#dialog").css('display', 'none');
-            $("#home").css('visibility', 'visible');
-            $("#edit_nav").css('visibility', 'visible');
-
-            checkCookie();
-            //getPage(showAmexForm);
-            $("#topics").attr('disabled', true);
-           
-
-    });
+      
+        });  
+    }
 }
 
 var myData = {
@@ -132,6 +135,8 @@ $("#myDropdown").alpaca({
 $("#myDropdown").change(loadPage);
 
 function loadPage() {
+
+
 
     pageIdToLoad = $("#alpaca1").val() || "a42ecce24ae285aea068";
     $("#topics").attr('disabled', true);
@@ -850,12 +855,7 @@ function showFooter() {
 }
 function showDrop() {
 
-
-    //console.log(node.topics);
-  
-  // 
-   
-    var topicArray = new Array();
+     var topicArray = new Array();
     $("#topics").append("<option value='none" + i + "'> None </option>");
     for (var i = 0; i < node.topics.length; i++) {
         topicArray[i] = node.topics[i].topicHeader;
@@ -1323,10 +1323,12 @@ function getCookie(cname) {
 }
 
 function setCredentialsFromLogin() {
+ 
 
+/*
     username = $("#txtUsername").val();
     password = $("#txtPassword").val();
- 
+    console.log('back');
     if (username == '' || password == '') {
         alert('Please enter valid username/password');
     } else {
@@ -1339,7 +1341,7 @@ function setCredentialsFromLogin() {
         $("#topics").attr('disabled', true);
         getPage(showDrop);
     }
-
+    */
 }
 
 
