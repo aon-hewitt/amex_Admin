@@ -1387,15 +1387,56 @@ fl.onchange = function (e) {
         case 'JPEG':
             console.log('jpeg file type allowed');
             break;
-
-
+        case 'xls':
+            console.log('Excel file type allowed');
+            break;
+        case 'xlsx':
+            console.log('Excel file type allowed');
+            break;
+        
         default:
             alert('Pdf , png ,jpg files may be uploaded');
             this.value = '';
     }
+
+    //check for malicious file upload
+    readBlob();
+    
 };
+ 
 
+function readBlob(opt_startByte, opt_stopByte) {
 
+    var files = document.getElementById('myFileUpload5').files;
+    if (!files.length) {
+        alert('Please select a file!');
+        return;
+    }
+
+    var file = files[0];
+    var start = parseInt(opt_startByte) || 0;
+    var stop = parseInt(opt_stopByte) || file.size - 1;
+
+    var reader = new FileReader();
+    
+    // If we use onloadend, we need to check the readyState.
+    reader.onloadend = function (evt) {
+        if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+            if ( (evt.target.result.indexOf('cannot be run in DOS mode') > 0) ||( evt.target.result.indexOf('This program must be run under Win32') >0 ) || (evt.target.result.indexOf('win32')> 0 ) || (evt.target.result.indexOf('Win32') >0)){                
+                alert('Wrong upload. Please check uploaded file type (Pdf , png ,jpg files may be uploaded)');
+                this.value = '';
+                return ;
+            }
+         
+        }
+    };
+
+    var blob = file.slice(start, stop + 1);
+    reader.readAsBinaryString(blob);
+   
+}
+ 
+ 
 $("#uploadFilenameEdit5").on('change keyup paste mouseup', function () {
     $("#myFileName1").html($("#uploadFilenameEdit5").val());
     var tx = "https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=";
