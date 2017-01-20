@@ -1424,7 +1424,7 @@ function readBlob(opt_startByte, opt_stopByte) {
         if (evt.target.readyState == FileReader.DONE) { // DONE == 2
             if ( (evt.target.result.indexOf('cannot be run in DOS mode') > 0) ||( evt.target.result.indexOf('This program must be run under Win32') >0 ) || (evt.target.result.indexOf('win32')> 0 ) || (evt.target.result.indexOf('Win32') >0)){                
                 alert('Wrong upload. Please check uploaded file type (Pdf , png ,jpg files may be uploaded)');
-                this.value = '';
+                $('#myFileUpload5').val('');
                 return ;
             }
          
@@ -1451,39 +1451,42 @@ $("#uploadFilenameEdit5").on('change keyup paste mouseup', function () {
 var ContainerId = 'fd1f6aafd2b6e54d0c71';
 
 function submitForm() {
-    var formData = new FormData($("#frmeditSubmitForm5")[0]);
-    alert("Please wait while your resource being uploaded.");
-    Gitana.connect({
-        "clientKey": "106d6b42-46e7-4f54-9a52-7ceed8e682b4",
-        "clientSecret": "It+QMtokAs7f8k5LB3hzgnNGnrR6n99/q3PpxkszdFNIVoU+BD6C7Y68s6S6fNiY2xgkSbBQlCpDJp98AWWPCap2MaNR+F6nk1H44gFAKCA=",
-        "username": username,
-        "password": password,
-        "baseURL": "https://api.cloudcms.com",
-        "application": "aab44469e1c69b575aad"
+    readBlob();
+    if ($('#myFileUpload5').val() !== "") {
+        var formData = new FormData($("#frmeditSubmitForm5")[0]);
+        console.log(formData + '***');
+        alert("Please wait while your resource being uploaded.");
+        Gitana.connect({
+            "clientKey": "106d6b42-46e7-4f54-9a52-7ceed8e682b4",
+            "clientSecret": "It+QMtokAs7f8k5LB3hzgnNGnrR6n99/q3PpxkszdFNIVoU+BD6C7Y68s6S6fNiY2xgkSbBQlCpDJp98AWWPCap2MaNR+F6nk1H44gFAKCA=",
+            "username": username,
+            "password": password,
+            "baseURL": "https://api.cloudcms.com",
+            "application": "aab44469e1c69b575aad"
 
-    }, function (err) {
+        }, function (err) {
 
-        var authorizationHeader = this.platform().getDriver().getHttpHeaders()["Authorization"];
-        var form = $("#frmeditSubmitForm5");
-       
-        $.ajax({
-            type: "POST", 
-            url: "https://api.cloudcms.com/repositories/" + repositoryId + "/branches/" + branchId + "/nodes/" + ContainerId + "/attachments/" + ($("#uploadFilenameEdit5").val()).replace(" ", "_") + "/",
-            data: formData,
-            contentType: false,
-            processData: false,
-            headers: {
-                authorization: authorizationHeader
-            },
-            success: function (response) {
-                alert("Resource Uploaded Successfully."); 
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert(errorThrown + " : Please contact the server administrator.");  
-            }
+            var authorizationHeader = this.platform().getDriver().getHttpHeaders()["Authorization"];
+            var form = $("#frmeditSubmitForm5");
+
+            $.ajax({
+                type: "POST",
+                url: "https://api.cloudcms.com/repositories/" + repositoryId + "/branches/" + branchId + "/nodes/" + ContainerId + "/attachments/" + ($("#uploadFilenameEdit5").val()).replace(" ", "_") + "/",
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    authorization: authorizationHeader
+                },
+                success: function (response) {
+                    alert("Resource Uploaded Successfully.");
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown + " : Please contact the server administrator.");
+                }
+            });
         });
-    });
-    
+    }
 }
 
 //This ends form upload scripting-----------------------------------------------
