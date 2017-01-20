@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="js/gitana.min.js"></script>  
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data" name="myForm" id="myForm">
+
+
+            <label for="myForm"></label>
+
+            <input type="file" id="myForm" name="myForm">
+
+            <br />
+
+            <label>
+
+                Give a name to your file (no psaces).<br />
+
+                <input type="text" id="myFilename">
+
+            </label>
+
+            <br />
+
+            <input id="mySubmitButton" name="mySubmit" type="submit" value="Submit">
+
+            <br />
+
+            <strong>Copy this link and paste in Browser address bar to download File:</strong><br /> https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=<span id="myFileName1"></span>
+        <input type="hidden" name="_dontcare">
+        </form>
+
+    <script>
+        var formData;
+        var repositoryId = 'f2c3571d7a2955e7f8a1';
+        var branchId = '7935c19b649b9c399528';
+        var ContainerId = 'fd1f6aafd2b6e54d0c71';
+
+        $("#myForm").submit(function (event) {
+            if ($("#myFilename").val()) {
+                console.log('Resource trying to Upload');
+                event.preventDefault(); // Prevent the form from submitting via the browser.
+                submitForm();
+            } else {
+                alert("Please check file name");
+                event.preventDefault();
+            }
+        });
+
+        function submitForm() {
+            //formData = new FormData($("#myForm")[0]);
+
+            var form = $("#myForm")[0]; // You need to use standart javascript object here
+            var formData = new FormData(form);
+
+            Gitana.connect({
+                "clientKey": "106d6b42-46e7-4f54-9a52-7ceed8e682b4",
+                "clientSecret": "It+QMtokAs7f8k5LB3hzgnNGnrR6n99/q3PpxkszdFNIVoU+BD6C7Y68s6S6fNiY2xgkSbBQlCpDJp98AWWPCap2MaNR+F6nk1H44gFAKCA=",
+                "username": 'johnvogen',
+                "password": 'x24ya999',
+                "baseURL": "https://api.cloudcms.com",
+                "application": "aab44469e1c69b575aad"
+
+            }, function(err) {
+                
+                // NOTE: this = appHelper
+                
+                var authorizationHeader = this.platform().getDriver().getHttpHeaders()["Authorization"];                
+                $.ajax({
+                    type: "POST",
+                    url: "https://api.cloudcms.com/repositories/" + repositoryId + "/branches/" + branchId + "/nodes/" + ContainerId + "/attachments/" + ($("#myFilename").val()).replace(" ", "_") + "/",                    
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    headers: {
+                        authorization: authorizationHeader
+                    },                    error: function (xhr, status, err){                        alert('fail ' + err);
+
+                    },
+                    success: function (response) {
+                        alert('success! ' + response);
+                    }
+                });
+            });
+        }
+        $("#myFilename").on('change keyup paste mouseup', function () {
+            $("#myFileName1").html($("#myFilename").val());
+
+        });
+
+    </script>
+</body>
+</html>
