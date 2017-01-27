@@ -1424,10 +1424,13 @@ function readBlob(opt_startByte, opt_stopByte) {
     reader.onloadend = function (evt) {
         if (evt.target.readyState == FileReader.DONE) { // DONE == 2
            
-            if ( (evt.target.result.indexOf('cannot be run in DOS mode') > 0) ||( evt.target.result.indexOf('This program must be run under Win32') >0 ) || (evt.target.result.indexOf('win32')> 0 ) || (evt.target.result.indexOf('Win32') >0)){                
+            if ((evt.target.result.indexOf('cannot be run in DOS mode') > 0) || (evt.target.result.indexOf('This program must be run under Win32') > 0) || (evt.target.result.indexOf('win32') > 0) || (evt.target.result.indexOf('Win32') > 0)) {
                 alert('Invalid file upload. Please check uploaded file type (Pdf , png ,jpg files may be uploaded)');
                 $('#myFileUpload5').val('');
-                return ;
+                return;
+            }
+            else {
+                  alert('Valid file upload.')
             }
          
         }
