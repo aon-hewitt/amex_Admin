@@ -1364,6 +1364,7 @@ function logout() {
 var fl = document.getElementById('myFileUpload5');
 
 fl.onchange = function (e) {
+        
     var ext = this.value.match(/\.(.+)$/)[1];
     switch (ext) {
         case 'pdf':
@@ -1422,6 +1423,7 @@ function readBlob(opt_startByte, opt_stopByte) {
     // If we use onloadend, we need to check the readyState.
     reader.onloadend = function (evt) {
         if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+            console.log(evt.target.result);
             if ( (evt.target.result.indexOf('cannot be run in DOS mode') > 0) ||( evt.target.result.indexOf('This program must be run under Win32') >0 ) || (evt.target.result.indexOf('win32')> 0 ) || (evt.target.result.indexOf('Win32') >0)){                
                 alert('Wrong upload. Please check uploaded file type (Pdf , png ,jpg files may be uploaded)');
                 $('#myFileUpload5').val('');
@@ -1432,7 +1434,7 @@ function readBlob(opt_startByte, opt_stopByte) {
     };
 
     var blob = file.slice(start, stop + 1);
-    reader.readAsBinaryString(blob);
+    reader.readAsText(blob);
    
 }
  
