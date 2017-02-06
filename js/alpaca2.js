@@ -23,7 +23,7 @@ var applicationId = 'c8a4dc1dd5644f2934be'; // to be provided for amex app
 var emailProviderId = '2c4497662def5cde8e96';//from amex app
 var workflowId = 'amexWorkflow';
 var projectId = '06fea8ff21b87b9e8358';
-var draftNodeId; 
+var draftNodeId;
 
 
 //Switching from local developement to production will require switching config objects
@@ -32,14 +32,14 @@ function getPage(callback) {
 
     username = $("#txtUsername").val();
     password = $("#txtPassword").val();
- 
-   /* var config = {
-                  "username": username,
-                "password": password,
-                 "baseURL": "/proxy"
-                
-    }
-    */
+
+    //var config = {
+    //               "username": username,
+    //             "password": password,
+    //              "baseURL": "/proxy"
+
+    // }
+
 
 
     if (!($("#txtUsername").val()) || (!($("#txtPassword").val()))) {
@@ -47,7 +47,7 @@ function getPage(callback) {
         return;
     }
     else {
-         
+
         var config = {
             "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
             "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
@@ -56,7 +56,7 @@ function getPage(callback) {
             "baseURL": "https://api.cloudcms.com",
             "application": "c8a4dc1dd5644f2934be"
         }
-         
+
         Gitana.connect(config, function (err) {
 
             if (err) {
@@ -91,8 +91,8 @@ function getPage(callback) {
                     branch = this;
                 });
             });
-      
-        });  
+
+        });
     }
 }
 
@@ -103,7 +103,7 @@ var myData = {
     "24faf2f946aaaf4df61c": "Care for Family",
     "e598bce4cbbc130ca67c": "Chat Money Expert",
     "2f459081ab8e3cbe5e44": "Contact Us",
-//    "baee9580b9b08558d6a1": "Core Benefits",
+    //    "baee9580b9b08558d6a1": "Core Benefits",
     "2862657ea64547039eeb": "Core Benefits",
     "5e9bfb25da6e1274d3bf": "Education Benefits",
     "27936ab42ee296645389": "Family Expense",
@@ -111,7 +111,7 @@ var myData = {
     "8399f467a5165c36718f": "Get Ready To Enroll",
     "c4428f3933404834e0db": "Get Specialized Health",
     "fc3b2067976ea86d472f": "Lower Expenses",
-  //  "1ff9c71fef8aadd38466": "Pregnancy Adoption Benefits",
+    //  "1ff9c71fef8aadd38466": "Pregnancy Adoption Benefits",
     "d231c85476b339833325": "Pregnancy Adoption Benefits",
     "cd9b943b651016db032e": "Protect Family Financially",
     "9706e1042e10ba5483df": "Save For The Future",
@@ -135,23 +135,15 @@ $("#myDropdown").alpaca({
 $("#myDropdown").change(loadPage);
 
 function loadPage() {
-
-
-
     pageIdToLoad = $("#alpaca1").val() || "a42ecce24ae285aea068";
     $("#topics").attr('disabled', true);
-   
-        $("#myform").css('visibility', 'hidden');
-        $("#field1").empty();
-    reShowForm();
 
+    $("#myform").css('visibility', 'hidden');
+    $("#field1").empty();
+    reShowForm();
 }
 
-
-
-
 var timer;
-
 function setTimer() {
     timer = setTimeout(function () {
         location.reload();
@@ -162,9 +154,7 @@ function clearTimer() {
     clearTimeout(timer);
 }
 
-
 function reShowForm() {
-
     clearTimer();
     console.log("Timer Cleared");
     setTimer();
@@ -176,22 +166,17 @@ function reShowForm() {
         "password": password,
         "baseURL": "https://api.cloudcms.com",
         "application": "aab44469e1c69b575aad"
-
     }).then(function () {
         platform = this;
-
         repository = platform.readRepository("f2c3571d7a2955e7f8a1").then(function () {
-
             branch = repository.readBranch("7935c19b649b9c399528").then(function () {
-
                 node = branch.readNode(pageIdToLoad).then(function () {
-                    //showAmexForm();
-                    
+                    //showAmexForm();                 
                     if (pageIdToLoad === 'a42ecce24ae285aea068') {
                         showHomePage();
                     } else if (pageIdToLoad === 'dbc77b26b046e61114ed') {
                         showFooter();
-                    }else {
+                    } else {
                         $('#topics').html("");
                         $("#topics").attr('disabled', true);
                         showDrop();
@@ -200,19 +185,9 @@ function reShowForm() {
             });
         });
     });
-
-    /* node = branch.readNode(pageIdToLoad).then(function () { 
-         showAmexForm();
-
-     });*/
-
-
 }
 function showHomePage() {
-
     console.log("show homepage form");
-
-
     $("#field1").empty();
     $("#myform").css('visibility', 'hidden');
     $("#field1").alpaca({
@@ -348,13 +323,9 @@ function showHomePage() {
                             console.log("Timer Cleared");
                             setTimer();
                             console.log("Timer Set");
-
                             value = this.getValue();
-
                             var valueJson = JSON.stringify(value);
                             console.log(valueJson);
-
-
                             branch.createNode({
                                 "name": value.name,
                                 "heading": value.heading,
@@ -469,9 +440,7 @@ function showHomePage() {
                                 "action": "remove",
                                 "enabled": false
                             }]
-
                     }
-
                 },
                 "forHealth": {
                     "type": "array",
@@ -524,7 +493,6 @@ function showHomePage() {
                                 "action": "remove",
                                 "enabled": false
                             }]
-
                     }
                 },
                 "forMoney": {
@@ -578,7 +546,6 @@ function showHomePage() {
                                 "action": "remove",
                                 "enabled": false
                             }]
-
                     }
                 },
                 "forFamily": {
@@ -632,11 +599,8 @@ function showHomePage() {
                                 "action": "remove",
                                 "enabled": false
                             }]
-
                     }
                 }
-
-
             }
         }
     });
@@ -645,10 +609,7 @@ function showHomePage() {
     $('.alpaca-form-button-Approve').append('Approve');
 }
 function showFooter() {
-
     console.log("show Footer form");
-
-
     $("#field1").empty();
     $("#myform").css('visibility', 'hidden');
     $("#field1").alpaca({
@@ -691,7 +652,7 @@ function showFooter() {
                 "footer": {
                     "type": "array",
                     "title": "",
-                    "toolbarsticky":false,
+                    "toolbarsticky": false,
                     "items": {
                         "properties": {
                             "trend": {
@@ -753,7 +714,7 @@ function showFooter() {
                                 "prefix": value.prefix,
                                 "flag": 'amexPage1Draft',
                                 "body": value.body,
-                                "footer": value.footer,                              
+                                "footer": value.footer,
                                 "_type": 'custom:footerpag0'
                             }).then(function () {
                                 console.log("Showing preview of Footer at QC site");
@@ -820,26 +781,26 @@ function showFooter() {
                                 }
                             },
                             "items": {
-                              
-                                 "actionbar": {
-                                        "actions": [{
-                                            "action": "add",
-                                            "enabled": false
-                                        },
-                                        {
-                                            "action": "remove",
-                                            "enabled": false
-                                        },
-                                        {
-                                            "action": "up",
-                                            "enabled": true
-                                        },
-                                        {
-                                            "action": "down",
-                                            "enabled": true
-                                        }
-                                        ]
+
+                                "actionbar": {
+                                    "actions": [{
+                                        "action": "add",
+                                        "enabled": false
+                                    },
+                                    {
+                                        "action": "remove",
+                                        "enabled": false
+                                    },
+                                    {
+                                        "action": "up",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "action": "down",
+                                        "enabled": true
                                     }
+                                    ]
+                                }
                             }
                         }
                     }
@@ -847,84 +808,63 @@ function showFooter() {
 
 
             }
-        } 
+        }
     });
-    
+
     $('.alpaca-form-button-Preview').append('Preview');
     $('.alpaca-form-button-Approve').append('Approve');
 }
-function showDrop() {
 
-     var topicArray = new Array();
+function showDrop() {
+    var topicArray = new Array();
     $("#topics").append("<option value='none" + i + "'> None </option>");
     for (var i = 0; i < node.topics.length; i++) {
         topicArray[i] = node.topics[i].topicHeader;
         if (topicArray[i] === undefined) {
             $("#topics").append("<option value='default'>Default</option>");
         }
-        else{
-               $("#topics").append("<option value='topics_" + i + "'>" + node.topics[i].topicHeader + " </option>");
-            }
-      
+        else {
+            $("#topics").append("<option value='topics_" + i + "'>" + node.topics[i].topicHeader + " </option>");
+        }
     }
     $("#topics").attr('disabled', false);
     showForm(i);
-    
+
 }
- 
+
 function showTopic(topic) {
-
-   
     var topic_id = topic.options[topic.selectedIndex].getAttribute('value');
- 
-       //close any open topics
-        for (var t = 0; t < topic.options.length ; t++) {
-
-            var field = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='topics_" + t + "']");
-
-            if (field.css('display') == 'block') {
-                field.css('display', 'none');
-            }
-            else {
-               // console.log('off');
-            }
-
+    //close any open topics
+    for (var t = 0; t < topic.options.length ; t++) {
+        var field = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='topics_" + t + "']");
+        if (field.css('display') == 'block') {
+            field.css('display', 'none');
         }
-
-        //check if default (ie get ready enroll page )then show everything
-        if (topic_id === 'default') { 
-            var f = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='topics_0']");
-            f.css('display', 'block');
-            f.css('border', '4px solid #F0A59C');
-            f.css('border-radius', '10px');
-            $('.alpaca-form-buttons-container').css('display', 'block');
-
-            //set topic title as readonly
-            var elem = $('input[name="topics_0_topicTitle1"]');
-            elem.attr('disabled', true);
-
-
-
-        } else {
-
-            var f = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='" + topic_id + "']");
-            f.css('display', 'block');
-            f.css('border', '4px solid #F0A59C');
-            f.css('border-radius', '10px');
-            $('.alpaca-form-buttons-container').css('display', 'block');
+        else {
+            // console.log('off');
+        }
     }
-
-   
-    
-   
+    //check if default (ie get ready enroll page )then show everything
+    if (topic_id === 'default') {
+        var f = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='topics_0']");
+        f.css('display', 'block');
+        f.css('border', '4px solid #F0A59C');
+        f.css('border-radius', '10px');
+        $('.alpaca-form-buttons-container').css('display', 'block');
+        //set topic title as readonly
+        var elem = $('input[name="topics_0_topicTitle1"]');
+        elem.attr('disabled', true);
+    } else {
+        var f = $('.alpaca-field.alpaca-field-object.alpaca-optional.alpaca-field-valid').find("[data-alpaca-field-name='" + topic_id + "']");
+        f.css('display', 'block');
+        f.css('border', '4px solid #F0A59C');
+        f.css('border-radius', '10px');
+        $('.alpaca-form-buttons-container').css('display', 'block');
+    }
 }
 function showForm(count) {
-
     console.log("showForm");
-
- 
     $("#field1").empty();
-
     $("#field1").alpaca({
         "view": "bootstrap-edit",
         "data": node,
@@ -1125,8 +1065,8 @@ function showForm(count) {
                                                     this.focus();
                                                     this.setValue('');
                                                     callback({
-                                                        "status": false                                                       
-                                                    });                                                   
+                                                        "status": false
+                                                    });
                                                     return;
                                                 }
                                                 callback({
@@ -1144,7 +1084,7 @@ function showForm(count) {
                                     "type": "ckeditor",
                                     "ckeditor": {
                                         "toolbar": [
-                                            ['Bold', 'Italic', 'Underline', 'Cut', 'Copy', 'Paste'], ['NumberedList', 'BulletedList' ,'Link' , 'Unlink' ], ['Table', 'Source']
+                                            ['Bold', 'Italic', 'Underline', 'Cut', 'Copy', 'Paste'], ['NumberedList', 'BulletedList', 'Link', 'Unlink'], ['Table', 'Source']
                                         ]
                                     }
                                 },
@@ -1170,61 +1110,44 @@ function showForm(count) {
                                 ,
                                 "order": 3
                             }
-
                         }
                     }
-
                 }
             }
         },
         "postRender": function (control) {
-
             var a = control.childrenByPropertyId["topics"];
             //a.getFieldEl().css('display', 'none');
-
             var n = control.childrenByPropertyId["topics"].children;
-            
-             
             for (var i = 0; i < n.length ; i++) {
-
-                   n[i].getFieldEl().css('display', 'none');
-                
+                n[i].getFieldEl().css('display', 'none');
                 //hide empty items  
-
                 for (var j = 0; j < n[i].children[3].children.length ; j++) {
-                   var $this = n[i].children[3].children[j];
-                   if ($this.childrenByPropertyId["sblob"].data == null && $this.childrenByPropertyId["link"].data == null) {
-                      // console.log('both empty' + j);
-                       n[i].children[3].children[j].getFieldEl().css('display', 'none');
+                    var $this = n[i].children[3].children[j];
+                    if ($this.childrenByPropertyId["sblob"].data == null && $this.childrenByPropertyId["link"].data == null) {
+                        // console.log('both empty' + j);
+                        n[i].children[3].children[j].getFieldEl().css('display', 'none');
                     } else {
-                       // console.log($this.childrenByPropertyId["sblob"].data);
-
-                   }
-
-                } 
+                        // console.log($this.childrenByPropertyId["sblob"].data);
+                    }
+                }
             }
-
-
-            
         }
     });
 
     myVar = setTimeout(function () {
-        $("#myform").css('visibility', 'visible');  }, 3000);
- 
+        $("#myform").css('visibility', 'visible');
+    }, 3000);
+
     //$("#field1").css("visibility", "hidden");
     $('.alpaca-form-button-Preview').append('Preview');
     $('.alpaca-form-button-Approve').append('Approve');
 }
- 
 
 function sendEmail() {
     console.log("sending email with draft node Id of " + draftNodeId);
-
     node.subchain(platform).then(function () {
-        
         // NOTE: this = platform
-
         var workflowConfig = {};
         workflowConfig.context = {};
         workflowConfig.context.projectId = projectId;
@@ -1236,14 +1159,14 @@ function sendEmail() {
         workflowConfig.runtime = {};
         workflowConfig.runtime.applicationId = applicationId;
         workflowConfig.runtime.emailProviderId = emailProviderId;
-        
+
         // auth info
         var authInfo = platform.getDriver().authInfo;
-        
+
         // find the current user
-        this.readDomain(authInfo.principalDomainId).readPrincipal(authInfo.principalId).then(function() {
+        this.readDomain(authInfo.principalDomainId).readPrincipal(authInfo.principalId).then(function () {
             var currentUser = this;
-        
+
             // create workflow and include the current user's email
             this.subchain(platform).createWorkflow(workflowId, workflowConfig).then(function () {
                 this.addResource(node);
@@ -1253,19 +1176,15 @@ function sendEmail() {
                     "email": currentUser.email
                 }
                 this.start(data).then(function () {
-
                 });
             });
-            
         });
-                
     });
 }
 
 
 
 function checkCookie() {
-
     if (performance.navigation.type == 1) {
         console.log('page reloaded');
         Gitana.deleteCookie("password", "/ah-prod.com-amex-admin");
@@ -1274,9 +1193,7 @@ function checkCookie() {
         Gitana.deleteCookie("username", "/localhost");
         Gitana.deleteCookie("password", "/");
         Gitana.deleteCookie("username", "/");
-
     }
-
     console.log('checking cookies');
     var user = getCookie("username");
     var pswd = getCookie("password");
@@ -1284,9 +1201,7 @@ function checkCookie() {
         console.log("Welcome again " + user);
         username = user;
         password = pswd;
-
         $("#dialog").dialog("close");
-
         loadPage();
     } else {
         //   $("#loginContainer").append('<div id="dialog" title="Please Log In."><label>Username:</label><input id="txtUsername" name="txtUsername" type="text"><label>Password:</label><input id="txtPassword" name="txtPassword" type="password"><br/><input id="submitButton" onclick="setCredentialsFromLogin()" name="Submit" type="button" value="Submit"><label id="lblLoginLable"></label></div>');
@@ -1323,28 +1238,24 @@ function getCookie(cname) {
 }
 
 function setCredentialsFromLogin() {
- 
-
-/*
-    username = $("#txtUsername").val();
-    password = $("#txtPassword").val();
-    console.log('back');
-    if (username == '' || password == '') {
-        alert('Please enter valid username/password');
-    } else {
-        $("#dialog").css('display', 'none');
-        $("#home").css('visibility', 'visible');
-        $("#edit_nav").css('visibility', 'visible');
-
-        checkCookie();
-        //getPage(showAmexForm);
-        $("#topics").attr('disabled', true);
-        getPage(showDrop);
-    }
-    */
+    /*
+        username = $("#txtUsername").val();
+        password = $("#txtPassword").val();
+        console.log('back');
+        if (username == '' || password == '') {
+            alert('Please enter valid username/password');
+        } else {
+            $("#dialog").css('display', 'none');
+            $("#home").css('visibility', 'visible');
+            $("#edit_nav").css('visibility', 'visible');
+    
+            checkCookie();
+            //getPage(showAmexForm);
+            $("#topics").attr('disabled', true);
+            getPage(showDrop);
+        }
+        */
 }
-
-
 
 function logout() {
     Gitana.deleteCookie("password", "/ah-prod.com-amex-admin");
@@ -1353,29 +1264,23 @@ function logout() {
     Gitana.deleteCookie("username", "/localhost");
     Gitana.deleteCookie("password", "/");
     Gitana.deleteCookie("username", "/");
-
     platform.logout();
     open("alpaca2.html", "_self");
 }
 
-
-
-
 var fl = document.getElementById('myFileUpload5');
-
 fl.onchange = function (e) {
-        
     var ext = this.value.match(/\.(.+)$/)[1];
     switch (ext) {
         case 'pdf':
             console.log('pdf file type allowed');
-            break; 
+            break;
         case 'png':
             console.log('png file type allowed');
             break;
         case 'PNG':
             console.log('png file type allowed');
-            break; 
+            break;
         case 'JPG':
             console.log('jpg file type allowed');
             break;
@@ -1384,7 +1289,7 @@ fl.onchange = function (e) {
             break;
         case 'jpeg':
             console.log('jpeg file type allowed');
-            break; 
+            break;
         case 'JPEG':
             console.log('jpeg file type allowed');
             break;
@@ -1394,67 +1299,51 @@ fl.onchange = function (e) {
         case 'xlsx':
             console.log('Excel file type allowed');
             break;
-        
         default:
             alert('Pdf , png ,jpg files may be uploaded');
             this.value = '';
     }
-
     //check for malicious file upload
     readBlob();
-    
 };
- 
 
 function readBlob(opt_startByte, opt_stopByte) {
-
     var files = document.getElementById('myFileUpload5').files;
     if (!files.length) {
         alert('Please select a file!');
         return;
     }
-
     var file = files[0];
     var start = parseInt(opt_startByte) || 0;
     var stop = parseInt(opt_stopByte) || file.size - 1;
-
     var reader = new FileReader();
-    
     // If we use onloadend, we need to check the readyState.
     reader.onloadend = function (evt) {
-        if (evt.target.readyState == FileReader.DONE) { // DONE == 2
-           
+        if (evt.target.readyState == FileReader.DONE) { // DONE == 2         
             if ((evt.target.result.indexOf('cannot be run in DOS mode') > 0) || (evt.target.result.indexOf('This program must be run under Win32') > 0) || (evt.target.result.indexOf('win32') > 0) || (evt.target.result.indexOf('Win32') > 0)) {
                 alert('Invalid file upload. Please check uploaded file type (Pdf , png ,jpg files may be uploaded)');
                 $('#myFileUpload5').val('');
                 return;
             }
             else {
-                  alert('Valid file upload.')
+                alert('Valid file upload.')
             }
-         
         }
     };
 
     var blob = file.slice(start, stop + 1);
     reader.readAsText(blob);
-   
+
 }
- 
- 
+
 $("#uploadFilenameEdit5").on('change keyup paste mouseup', function () {
     $("#myFileName1").html($("#uploadFilenameEdit5").val());
     var tx = "https://3e87873b-2f33-4a70-8478-8a480f81553e-hosted.cloudcms.net/static/test.pdf?repository=f2c3571d7a2955e7f8a1&branch=7935c19b649b9c399528&node=fd1f6aafd2b6e54d0c71&attachment=";
     $("#lnk1").html(tx + ($("#uploadFilenameEdit5").val()).replace(" ", "_"));
-
-    
 });
-
-
 
 //This is form upload scripting here--------------------------------------------
 var ContainerId = 'fd1f6aafd2b6e54d0c71';
-
 function submitForm() {
     readBlob();
     if ($('#myFileUpload5').val() !== "") {
@@ -1468,12 +1357,9 @@ function submitForm() {
             "password": password,
             "baseURL": "https://api.cloudcms.com",
             "application": "aab44469e1c69b575aad"
-
         }, function (err) {
-
             var authorizationHeader = this.platform().getDriver().getHttpHeaders()["Authorization"];
             var form = $("#frmeditSubmitForm5");
-
             $.ajax({
                 type: "POST",
                 url: "https://api.cloudcms.com/repositories/" + repositoryId + "/branches/" + branchId + "/nodes/" + ContainerId + "/attachments/" + ($("#uploadFilenameEdit5").val()).replace(" ", "_") + "/",
@@ -1498,7 +1384,7 @@ function submitForm() {
 
 
 function copyToClipboard(element) {
-    var lnk= $("#uploadFilenameEdit5").val();
+    var lnk = $("#uploadFilenameEdit5").val();
     if (lnk) {
         var $temp = $("<input>");
         $("body").append($temp);
