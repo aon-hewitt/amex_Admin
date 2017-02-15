@@ -160,12 +160,12 @@ function reShowForm() {
     setTimer();
     console.log("Timer Set");
     platform = Gitana.connect({
-        "clientKey": "106d6b42-46e7-4f54-9a52-7ceed8e682b4",
-        "clientSecret": "It+QMtokAs7f8k5LB3hzgnNGnrR6n99/q3PpxkszdFNIVoU+BD6C7Y68s6S6fNiY2xgkSbBQlCpDJp98AWWPCap2MaNR+F6nk1H44gFAKCA=",
+        "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
+        "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
         "username": username,
         "password": password,
         "baseURL": "https://api.cloudcms.com",
-        "application": "aab44469e1c69b575aad"
+        "application": "c8a4dc1dd5644f2934be"
     }).then(function () {
         platform = this;
         repository = platform.readRepository("f2c3571d7a2955e7f8a1").then(function () {
@@ -1351,12 +1351,12 @@ function submitForm() {
         console.log(formData + '***');
         alert("Please wait while your resource being uploaded.");
         Gitana.connect({
-            "clientKey": "106d6b42-46e7-4f54-9a52-7ceed8e682b4",
-            "clientSecret": "It+QMtokAs7f8k5LB3hzgnNGnrR6n99/q3PpxkszdFNIVoU+BD6C7Y68s6S6fNiY2xgkSbBQlCpDJp98AWWPCap2MaNR+F6nk1H44gFAKCA=",
+            "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
+            "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
             "username": username,
             "password": password,
             "baseURL": "https://api.cloudcms.com",
-            "application": "aab44469e1c69b575aad"
+            "application": "c8a4dc1dd5644f2934be"
         }, function (err) {
             var authorizationHeader = this.platform().getDriver().getHttpHeaders()["Authorization"];
             var form = $("#frmeditSubmitForm5");
