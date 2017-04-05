@@ -13,7 +13,7 @@ var dataSource;
 var pageIdToLoad;
 var username;
 var password;
-
+var config;
 
 
 var value;
@@ -33,7 +33,7 @@ function getPage(callback) {
     username = $("#txtUsername").val();
     password = $("#txtPassword").val();
 
-    var config = {
+    config = {
                    "username": username,
                  "password": password,
                   "baseURL": "/proxy"
