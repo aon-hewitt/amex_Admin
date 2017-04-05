@@ -156,9 +156,9 @@ function clearTimer() {
 
 function reShowForm() {
     clearTimer();
-    console.log("Timer Cleared");
+    //console.log("Timer Cleared");
     setTimer();
-    console.log("Timer Set");
+    //console.log("Timer Set");
     platform = Gitana.connect({
         "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
         "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
@@ -320,9 +320,9 @@ function showHomePage() {
                     "Preview": {
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
                             value = this.getValue();
                             var valueJson = JSON.stringify(value);
                             console.log(valueJson);
@@ -352,9 +352,9 @@ function showHomePage() {
                         },
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             var value = this.getValue();
                             sendEmail(); //object must be created on cloudCMS before email can be sent
@@ -697,9 +697,9 @@ function showFooter() {
                     "Preview": {
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             value = this.getValue();
 
@@ -731,9 +731,9 @@ function showFooter() {
                         },
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             var value = this.getValue();
                             sendEmail(); //object must be created on cloudCMS before email can be sent
@@ -863,7 +863,7 @@ function showTopic(topic) {
     }
 }
 function showForm(count) {
-    console.log("showForm");
+    //console.log("showForm");
     $("#field1").empty();
     $("#field1").alpaca({
         "view": "bootstrap-edit",
@@ -958,9 +958,9 @@ function showForm(count) {
                     "Preview": {
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             value = this.getValue();
 
@@ -991,9 +991,9 @@ function showForm(count) {
                         },
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             var value = this.getValue();
                             sendEmail(); //object must be created on cloudCMS before email can be sent
@@ -1194,7 +1194,7 @@ function checkCookie() {
         Gitana.deleteCookie("password", "/");
         Gitana.deleteCookie("username", "/");
     }
-    console.log('checking cookies');
+    //console.log('checking cookies');
     var user = getCookie("username");
     var pswd = getCookie("password");
     if (user != "" && pswd != "") {

@@ -151,9 +151,9 @@ function clearTimer() {
 function reShowForm() {
 
     clearTimer();
-    console.log("Timer Cleared");
+    //console.log("Timer Cleared");
     setTimer();
-    console.log("Timer Set");
+    //console.log("Timer Set");
     platform = Gitana.connect({
         "clientKey": "106d6b42-46e7-4f54-9a52-7ceed8e682b4",
         "clientSecret": "It+QMtokAs7f8k5LB3hzgnNGnrR6n99/q3PpxkszdFNIVoU+BD6C7Y68s6S6fNiY2xgkSbBQlCpDJp98AWWPCap2MaNR+F6nk1H44gFAKCA=",
@@ -330,9 +330,9 @@ function showHomePage() {
                     "Preview": {
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             value = this.getValue();
 
@@ -368,9 +368,9 @@ function showHomePage() {
                         },
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             var value = this.getValue();
                             sendEmail(); //object must be created on cloudCMS before email can be sent
@@ -723,9 +723,9 @@ function showFooter() {
                     "Preview": {
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             value = this.getValue();
 
@@ -756,9 +756,9 @@ function showFooter() {
                         },
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             var value = this.getValue();
                             sendEmail(); //object must be created on cloudCMS before email can be sent
@@ -910,7 +910,7 @@ function showTopic(topic) {
 }
 function showForm(count) {
 
-    console.log("showForm");
+    //console.log("showForm");
 
  
     $("#field1").empty();
@@ -1008,9 +1008,9 @@ function showForm(count) {
                     "Preview": {
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             value = this.getValue();
 
@@ -1045,9 +1045,9 @@ function showForm(count) {
                         },
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             var value = this.getValue();
                             sendEmail(); //object must be created on cloudCMS before email can be sent
@@ -1342,9 +1342,9 @@ function showAmexForm() {
                     "submit": {
                         "click": function () {
                             clearTimer();
-                            console.log("Timer Cleared");
+                            //console.log("Timer Cleared");
                             setTimer();
-                            console.log("Timer Set");
+                            //console.log("Timer Set");
 
                             var value = this.getValue();
                             alert(JSON.stringify(value, null, "  "));
@@ -1489,7 +1489,7 @@ function checkCookie() {
 
     }
 
-    console.log('checking cookies');
+    //console.log('checking cookies');
     var user = getCookie("username");
     var pswd = getCookie("password");
     if (user != "" && pswd != "") {
