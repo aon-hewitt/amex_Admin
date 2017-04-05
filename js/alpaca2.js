@@ -159,14 +159,7 @@ function reShowForm() {
     //console.log("Timer Cleared");
     setTimer();
     //console.log("Timer Set");
-    platform = Gitana.connect({
-        "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
-        "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
-        "username": username,
-        "password": password,
-        "baseURL": "https://api.cloudcms.com",
-        "application": "c8a4dc1dd5644f2934be"
-    }).then(function () {
+    platform = Gitana.connect(config).then(function () {
         platform = this;
         repository = platform.readRepository("f2c3571d7a2955e7f8a1").then(function () {
             branch = repository.readBranch("7935c19b649b9c399528").then(function () {
@@ -1350,14 +1343,7 @@ function submitForm() {
         var formData = new FormData($("#frmeditSubmitForm5")[0]);
         console.log(formData + '***');
         alert("Please wait while your resource being uploaded.");
-        Gitana.connect({
-            "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
-            "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
-            "username": username,
-            "password": password,
-            "baseURL": "https://api.cloudcms.com",
-            "application": "c8a4dc1dd5644f2934be"
-        }, function (err) {
+        Gitana.connect(config, function (err) {
             var authorizationHeader = this.platform().getDriver().getHttpHeaders()["Authorization"];
             var form = $("#frmeditSubmitForm5");
             $.ajax({
