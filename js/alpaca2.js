@@ -19,11 +19,11 @@ var config;
 var value;
 var previewObject;
 
-//var applicationId = 'c8a4dc1dd5644f2934be'; // to be provided for amex app
-var applicationId = '6d5aa7e34b8be727b8d5'; // to be provided for amex app
+var applicationId = 'c8a4dc1dd5644f2934be'; // to be provided for amex app
+//var applicationId = '6d5aa7e34b8be727b8d5'; // to be provided for amex app
 
-//var emailProviderId = '2c4497662def5cde8e96';//from amex app
-var emailProviderId = '6b1b6a8e002d85bb28bd';//from amex app
+var emailProviderId = '2c4497662def5cde8e96';//from amex app
+//var emailProviderId = '6b1b6a8e002d85bb28bd';//from amex app
 
 var workflowId = 'amexWorkflow';
 var projectId = '06fea8ff21b87b9e8358';
