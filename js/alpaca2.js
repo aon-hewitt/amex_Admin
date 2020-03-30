@@ -339,7 +339,9 @@ function showHomePage() {
                                 console.log("Showing preview of Homepage at QC site");
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
-                                window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+                                //window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+                                window.open('http://qc.ahdemo.com/john/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+
                             });
                         }
                     },
@@ -717,8 +719,9 @@ function showFooter() {
                                 console.log("Showing preview of Footer at QC site");
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
-                                //window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
-                                window.open('http://qc.ah-prod.com/amex/' + 'index' + '.html' + '?draftFooter=' + this._doc, 'previewWindow');
+                                //window.open('http://qc.ah-prod.com/amex/' + 'index' + '.html' + '?draftFooter=' + this._doc, 'previewWindow');
+                                window.open('http://qc.ahdemo.com/john/amex/' + 'index' + '.html' + '?draftFooter=' + this._doc, 'previewWindow');
+
                             });
                         }
                     },
@@ -978,7 +981,9 @@ function showForm(count) {
                                 console.log("Showing preview of standard page at QC site");
                                 $('.alpaca-form-button-Approve').removeAttr("disabled");
                                 draftNodeId = this._doc;
-                                window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+                                //window.open('http://qc.ah-prod.com/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+                                window.open('http://qc.ahdemo.com/john/amex/' + value.name + '.html' + '?draft=' + this._doc, 'previewWindow');
+
                             });
                         }
                     },
