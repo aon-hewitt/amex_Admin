@@ -1148,6 +1148,7 @@ function showForm(count) {
 
 function sendEmail() {
     console.log("sending email with draft node Id of " + draftNodeId);
+    console.log("node: ", node);
     node.subchain(platform).then(function () {
         // NOTE: this = platform
         var workflowConfig = {};
@@ -1164,22 +1165,30 @@ function sendEmail() {
         workflowConfig.runtime.repositoryId = repositoryId;
         workflowConfig.runtime.branchId = branchId;
 
-
+        console.log("workflowconfig: ", workflowConfig);
         // auth info
         var authInfo = platform.getDriver().authInfo;
-
+        console.log("authInfo: ", authInfo);
         // find the current user
+
+        console.log("this: ", this);
         this.readDomain(authInfo.principalDomainId).readPrincipal(authInfo.principalId).then(function () {
             var currentUser = this;
 
+            console.log("currentUser: ", currentUser);
             // create workflow and include the current user's email
+
+            console.log("platform: ", platform);
+            console.log("workflowId: ", workflowId);
             this.subchain(platform).createWorkflow(workflowId, workflowConfig).then(function () {
+                console.log("Adding resource node as above: ", node );
                 this.addResource(node);
                 var data = {
                     "coreNodeId": node._doc,
                     "draftNodeId": draftNodeId,
                     "email": currentUser.email
                 }
+                console.log("starting email workflow with this data: ", data);
                 this.start(data).then(function () {
                 });
             });
