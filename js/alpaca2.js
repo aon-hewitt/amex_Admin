@@ -25,7 +25,9 @@ var applicationId = '6d5aa7e34b8be727b8d5'; // to be provided for amex app
 //var emailProviderId = '2c4497662def5cde8e96';//from amex app
 var emailProviderId = '6b1b6a8e002d85bb28bd';//from amex app
 
-var workflowId = 'amexWorkflow';
+//var workflowId = 'amexWorkflow';
+var workflowId = 'amexClone';
+
 var projectId = '06fea8ff21b87b9e8358';
 var draftNodeId;
 
@@ -37,29 +39,29 @@ function getPage(callback) {
     username = $("#txtUsername").val();
     password = $("#txtPassword").val();
 
-    config = {
-                   "username": username,
-                 "password": password,
-                  "baseURL": "/proxy"
+    //config = {
+    //               "username": username,
+    //             "password": password,
+    //              "baseURL": "/proxy"
 
-     }
+    // }
 
 
 
     if (!($("#txtUsername").val()) || (!($("#txtPassword").val()))) {
-        $("#lblLoginLable").html("Username or password are incorrect. Please try again.");
-        return;
+       // $("#lblLoginLable").html("Username or password are incorrect. Please try again.");
+       // return;
     }
     else {
 
-        //config = {
-        //    "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
-        //    "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
-        //    "username": username,
-        //    "password": password,
-        //    "baseURL": "https://api.cloudcms.com",
-        //    "application": "c8a4dc1dd5644f2934be"
-        //}
+        config = {
+            "clientKey": "1bd1ddc4-37c7-4c80-b69b-b0d8d226cc34",
+            "clientSecret": "CamxJ6k/aNYbuZVV1uTox0imFpsURRugGjt/AD77DGENmJ+U87Z1eh4KBdKtCcY8/Regd9DH8DYWGJ2mcdSCsK3a+aX1WR2ftnxQQ8yg6ck=",
+            "username": username,
+            "password": password,
+            "baseURL": "https://api.cloudcms.com",
+            "application": "c8a4dc1dd5644f2934be"
+        }
 
         Gitana.connect(config, function (err) {
 
